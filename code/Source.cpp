@@ -10,7 +10,7 @@ int main()
     //define values to store and add here;
     sf::Vector2f firstmid;
     sf::Vector2f secondmid;
-    
+    std::vector<sf::Vector2f> storedpoints;
     sf::Vector2f position1;
     sf::Vector2f position2;
     sf::Vector2f position3;
@@ -74,6 +74,20 @@ int main()
     rectangle5.setOutlineThickness(1);
     rectangle5.setPosition(rectangleposition5);
 
+    sf::RectangleShape rectangle6;
+    sf::Vector2f rectangleposition6(600,500);
+    rectangle6.setSize(sf::Vector2f(1, 1));
+    rectangle6.setOutlineColor(sf::Color::White);
+    rectangle6.setOutlineThickness(1);
+    rectangle6.setPosition(rectangleposition6);
+
+    sf::RectangleShape rectangle7;
+    sf::Vector2f rectangleposition7(600, 500);
+    rectangle7.setSize(sf::Vector2f(1, 1));
+    rectangle7.setOutlineColor(sf::Color::White);
+    rectangle7.setOutlineThickness(1);
+    rectangle7.setPosition(rectangleposition7);
+
     sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
     window.setFramerateLimit(60);
     // run the program as long as the window is open
@@ -136,9 +150,8 @@ int main()
 
         
 
-
-        window.clear(sf::Color::Black);
-
+            //this function makes it so the frames dont build up
+          //  window.clear(sf::Color::Black);
         //everything renders here
 
         window.draw(rectangle1);
@@ -148,8 +161,8 @@ int main()
         window.draw(rectangle5);
             if (mouseclick4 == true)
             {
-            
-                for (int i = 0; i < 200; i++)
+                    //Modify i < 1 to set the time it takes for the triangle to build
+                for (int i = 0; i < 10; i++)
                 {
                 
                     int Random = rand() % 3 + 1;
@@ -165,16 +178,16 @@ int main()
                     {
                     secondmid.x = (position2.x + firstmid.x) / 2;
                     secondmid.y = (position2.y + firstmid.y) / 2;
-                    rectangle5.setPosition(secondmid);
-                    window.draw(rectangle5);
+                    rectangle6.setPosition(secondmid);
+                    window.draw(rectangle6);
                     firstmid = secondmid;
                     }
                     if (Random == 3) 
                     {
                     secondmid.x = (position3.x + firstmid.x) / 2;
                     secondmid.y = (position3.y + firstmid.y) / 2;
-                    rectangle5.setPosition(secondmid);
-                    window.draw(rectangle5);
+                    rectangle7.setPosition(secondmid);
+                    window.draw(rectangle7);
                     firstmid = secondmid;
                     }
                 }
