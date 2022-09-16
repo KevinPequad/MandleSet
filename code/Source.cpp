@@ -88,14 +88,16 @@ int main()
     rectangle7.setOutlineThickness(1);
     rectangle7.setPosition(rectangleposition7);
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "My window");
     window.setFramerateLimit(60);
     // run the program as long as the window is open
     while (window.isOpen())
     {
 
 
-
+        if (mouseclick4 == false) {
+            window.draw(text);
+        }
 
 
 
@@ -117,6 +119,8 @@ int main()
                     firstmid = position4;
                     
                     mouseclick4 = true;
+                    
+                    
                 }
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !mouseclick3 && mouseclick2 == true)
                 {
@@ -125,7 +129,7 @@ int main()
                     rectangle3.setPosition(mousePosition);
                     mouseclick3 = true;
                     position3 = mousePosition;
-                    window.clear(sf::Color::Black);
+                    
                     std::cout << position3.x << " " << position3.y << std::endl;
                 }
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !mouseclick2 && mouseclick1 == true)
@@ -159,10 +163,8 @@ int main()
           //  window.clear(sf::Color::Black);
         //everything renders here
             
-            
-            if (mouseclick4 == false) {
-                window.draw(text);
-                }
+            if(mouseclick4 == true)
+            window.clear(sf::Color::Black);
 
             
            
@@ -174,7 +176,7 @@ int main()
             if (mouseclick4 == true)
             {
                     //Modify i < 1 to set the time it takes for the triangle to build
-                for (int i = 0; i < 50; i++)
+                for (int i = 0; i < 200; i++)
                 {
                 
                     int Random = rand() % 3 + 1;
