@@ -87,6 +87,7 @@ int main()
     rectangle7.setOutlineColor(sf::Color::White);
     rectangle7.setOutlineThickness(1);
     rectangle7.setPosition(rectangleposition7);
+   
 
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "My window");
     window.setFramerateLimit(60);
@@ -119,6 +120,37 @@ int main()
                     firstmid = position4;
                     
                     mouseclick4 = true;
+                    if (mouseclick4 == true)
+                    {
+                        //Modify i < 1 to set the time it takes for the triangle to build
+                        for (int i = 0; i < 7000; i++)
+                        {
+
+                            int Random = rand() % 3 + 1;
+                            if (Random == 1)
+                            {
+                                secondmid.x = (position1.x + firstmid.x) / 2;
+                                secondmid.y = (position1.y + firstmid.y) / 2;
+                                storedpoints.push_back(secondmid);
+                                firstmid = secondmid;
+                            }
+                            if (Random == 2)
+                            {
+                                secondmid.x = (position2.x + firstmid.x) / 2;
+                                secondmid.y = (position2.y + firstmid.y) / 2;
+                                storedpoints.push_back(secondmid);
+                                firstmid = secondmid;
+                            }
+                            if (Random == 3)
+                            {
+                                secondmid.x = (position3.x + firstmid.x) / 2;
+                                secondmid.y = (position3.y + firstmid.y) / 2;
+                                storedpoints.push_back(secondmid);
+                                firstmid = secondmid;
+                            }
+                        }
+
+                    }
                     
                     
                 }
@@ -173,37 +205,7 @@ int main()
         window.draw(rectangle3);
         window.draw(rectangle4);
         window.draw(rectangle5);
-            if (mouseclick4 == true)
-            {
-                    //Modify i < 1 to set the time it takes for the triangle to build
-                for (int i = 0; i < 200; i++)
-                {
-                
-                    int Random = rand() % 3 + 1;
-                    if (Random == 1)
-                    {
-                    secondmid.x = (position1.x + firstmid.x) /2;
-                    secondmid.y = (position1.y + firstmid.y) /2;
-                    storedpoints.push_back(secondmid);
-                    firstmid = secondmid;
-                    }
-                    if (Random == 2)
-                    {
-                    secondmid.x = (position2.x + firstmid.x) / 2;
-                    secondmid.y = (position2.y + firstmid.y) / 2;
-                    storedpoints.push_back(secondmid);
-                    firstmid = secondmid;
-                    }
-                    if (Random == 3) 
-                    {
-                    secondmid.x = (position3.x + firstmid.x) / 2;
-                    secondmid.y = (position3.y + firstmid.y) / 2;
-                    storedpoints.push_back(secondmid);
-                    firstmid = secondmid;
-                    }
-                }
-        
-            }
+          
             for (int i = 0; i < storedpoints.size(); i++) {
 
 
