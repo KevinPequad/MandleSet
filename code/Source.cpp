@@ -40,49 +40,49 @@ int main()
     //Rectangle Render Values
 
     sf::RectangleShape rectangle1;
-    sf::Vector2f rectangleposition1(600, 500);
+    sf::Vector2f rectangleposition1(0,0);
     rectangle1.setSize(sf::Vector2f(1, 1));
     rectangle1.setOutlineColor(sf::Color::White);
     rectangle1.setOutlineThickness(1);
     rectangle1.setPosition(rectangleposition1);
 
     sf::RectangleShape rectangle2;
-    sf::Vector2f rectangleposition2(600, 500);
+    sf::Vector2f rectangleposition2(0,0);
     rectangle2.setSize(sf::Vector2f(1, 1));
     rectangle2.setOutlineColor(sf::Color::White);
     rectangle2.setOutlineThickness(1);
     rectangle2.setPosition(rectangleposition2);
 
     sf::RectangleShape rectangle3;
-    sf::Vector2f rectangleposition3(600, 500);
+    sf::Vector2f rectangleposition3(0,0);
     rectangle3.setSize(sf::Vector2f(1, 1));
     rectangle3.setOutlineColor(sf::Color::White);
     rectangle3.setOutlineThickness(1);
     rectangle3.setPosition(rectangleposition3);
 
     sf::RectangleShape rectangle4;
-    sf::Vector2f rectangleposition4(600, 500);
+    sf::Vector2f rectangleposition4(0,0);
     rectangle4.setSize(sf::Vector2f(1, 1));
     rectangle4.setOutlineColor(sf::Color::White);
     rectangle4.setOutlineThickness(1);
     rectangle4.setPosition(rectangleposition4);
 
     sf::RectangleShape rectangle5;
-    sf::Vector2f rectangleposition5(600, 500);
+    sf::Vector2f rectangleposition5(0,0);
     rectangle5.setSize(sf::Vector2f(1, 1));
     rectangle5.setOutlineColor(sf::Color::White);
     rectangle5.setOutlineThickness(1);
     rectangle5.setPosition(rectangleposition5);
 
     sf::RectangleShape rectangle6;
-    sf::Vector2f rectangleposition6(600,500);
+    sf::Vector2f rectangleposition6(0,0);
     rectangle6.setSize(sf::Vector2f(1, 1));
     rectangle6.setOutlineColor(sf::Color::White);
     rectangle6.setOutlineThickness(1);
     rectangle6.setPosition(rectangleposition6);
 
     sf::RectangleShape rectangle7;
-    sf::Vector2f rectangleposition7(600, 500);
+    sf::Vector2f rectangleposition7(0,0);
     rectangle7.setSize(sf::Vector2f(1, 1));
     rectangle7.setOutlineColor(sf::Color::White);
     rectangle7.setOutlineThickness(1);
@@ -104,6 +104,7 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))
         {
+
             if (event.type == sf::Event::MouseButtonPressed)
             {
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !mouseclick4 && mouseclick3 == true)
@@ -114,6 +115,7 @@ int main()
                     position4 = mousePosition;
                     std::cout << position4.x << " " << position4.y << std::endl;
                     firstmid = position4;
+                    
                     mouseclick4 = true;
                 }
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !mouseclick3 && mouseclick2 == true)
@@ -123,6 +125,7 @@ int main()
                     rectangle3.setPosition(mousePosition);
                     mouseclick3 = true;
                     position3 = mousePosition;
+                    window.clear(sf::Color::Black);
                     std::cout << position3.x << " " << position3.y << std::endl;
                 }
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !mouseclick2 && mouseclick1 == true)
@@ -141,19 +144,28 @@ int main()
                     rectangle1.setPosition(mousePosition);
                     mouseclick1 = true;
                     position1 = mousePosition;
-                    std::cout << position1.x << " "<< position1.y << std::endl;
+                    std::cout << position1.x << " " << position1.y << std::endl;
+                    
+                    
                 }
 
             }
-            
-            
 
-        
+
+
+
 
             //this function makes it so the frames dont build up
           //  window.clear(sf::Color::Black);
         //everything renders here
+            
+            
+            if (mouseclick4 == false) {
+                window.draw(text);
+                }
 
+            
+           
         window.draw(rectangle1);
         window.draw(rectangle2);
         window.draw(rectangle3);
@@ -162,7 +174,7 @@ int main()
             if (mouseclick4 == true)
             {
                     //Modify i < 1 to set the time it takes for the triangle to build
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 50; i++)
                 {
                 
                     int Random = rand() % 3 + 1;
@@ -170,31 +182,39 @@ int main()
                     {
                     secondmid.x = (position1.x + firstmid.x) /2;
                     secondmid.y = (position1.y + firstmid.y) /2;
-                    rectangle5.setPosition(secondmid);
-                    window.draw(rectangle5);
+                    storedpoints.push_back(secondmid);
                     firstmid = secondmid;
                     }
                     if (Random == 2)
                     {
                     secondmid.x = (position2.x + firstmid.x) / 2;
                     secondmid.y = (position2.y + firstmid.y) / 2;
-                    rectangle6.setPosition(secondmid);
-                    window.draw(rectangle6);
+                    storedpoints.push_back(secondmid);
                     firstmid = secondmid;
                     }
                     if (Random == 3) 
                     {
                     secondmid.x = (position3.x + firstmid.x) / 2;
                     secondmid.y = (position3.y + firstmid.y) / 2;
-                    rectangle7.setPosition(secondmid);
-                    window.draw(rectangle7);
+                    storedpoints.push_back(secondmid);
                     firstmid = secondmid;
                     }
                 }
         
             }
+            for (int i = 0; i < storedpoints.size(); i++) {
 
 
+                rectangle7.setPosition(storedpoints.at(i));
+                window.draw(rectangle7);
+
+                rectangle5.setPosition(storedpoints.at(i));
+                window.draw(rectangle5);
+
+                rectangle6.setPosition(storedpoints.at(i));
+                window.draw(rectangle6);
+            }
+            
 
         // "close requested" event: we close the window
         if (event.type == sf::Event::Closed)
