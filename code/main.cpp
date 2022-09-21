@@ -5,6 +5,14 @@
 #include <complex>      // std::complex, std::abs
 using namespace std;
 
+int countIterations(Vector2f coord)
+{
+    complex<float> c = { coord.x, coord.y };
+
+    ///while(abs(z) < 2.0 && counter < MAX_ITER)
+        ///z = z*z + coord
+}
+
 int main()
 {
     //include these later in Complex plane
