@@ -4,6 +4,7 @@
 #include <vector>     // std::cout
 #include <complex>      // std::complex, std::abs
 using namespace std;
+using namespace sf;
 
 int countIterations(Vector2f coord)
 {
