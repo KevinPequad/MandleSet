@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-    
+
     double re = -0.77568377;
     double im = 0.13646737;
     complex<double> c(re, im);
@@ -24,21 +24,28 @@ int main()
     cout << "|z_3| = " << abs(z) << endl;
 
     sf::RectangleShape rectangle7;
-    sf::Vector2f rectangleposition7(0,0);
+    sf::Vector2f rectangleposition7(0, 0);
     rectangle7.setSize(sf::Vector2f(1, 1));
     rectangle7.setOutlineColor(sf::Color::White);
     rectangle7.setOutlineThickness(1);
     rectangle7.setPosition(rectangleposition7);
-   
-    //test
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "My window");
+
+
+    //finds monitor ratio display
+    int xpixels = sf::VideoMode::getDesktopMode().width;
+    int ypixels = sf::VideoMode::getDesktopMode().height;
+    
+    // Create a window with the same pixel depth as the desktop
+    sf::RenderWindow window;
+    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+    window.create(sf::VideoMode(1024, 768), "SFML window");
     window.setFramerateLimit(60);
     // run the program as long as the window is open
     while (window.isOpen())
     {
 
 
-       
+
 
 
 
@@ -50,31 +57,37 @@ int main()
 
             if (event.type == sf::Event::MouseButtonPressed)
             {
-                if (sf::Mouse::isButtonPressed(sf::Mouse::Left) true);
-                {
-                    sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-                  
-                    
-                  
 
 
 
 
 
-           
-        //everything renders here
-          
-            window.clear(sf::Color::Black);
 
+
+
+
+
+
+
+                
+
+              
+
+
+
+
+                // "close requested" event: we close the window
+             if (event.type == sf::Event::Closed)
+             window.close();
+            }
             
-       
 
-        // "close requested" event: we close the window
-        if (event.type == sf::Event::Closed)
-            window.close();
         }
-        window.display();
+
+    window.display();
+        //everything renders here
+        
+
+
     }
-    
-      
-    return 0;
+}
