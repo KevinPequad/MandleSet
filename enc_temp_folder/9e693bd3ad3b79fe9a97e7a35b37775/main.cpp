@@ -7,12 +7,7 @@ using namespace std;
 
 int main()
 {
-    //include these later in Complex plane
-    const unsigned int MAX_ITER = 64;
-    const float BASE_WIDTH = 4.0;
-    const float BASE_HEIGHT = 4.0;
-    const float BASE_ZOOM = 0.5;
-
+    
     double re = -0.77568377;
     double im = 0.13646737;
     complex<double> c(re, im);
