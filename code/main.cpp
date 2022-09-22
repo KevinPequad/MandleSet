@@ -12,12 +12,13 @@ public:
     int MAX_ITER = 80;
     int mandelbrot(complex<float> c) 
     {
-        float z = 0;
+        complex<float> z = 0;
         int n = 0;
         while(abs(z) <= 2 && n < MAX_ITER){
         z = z * z + c;
         n += 1;
         return n;
+        
         }
      
 
@@ -46,6 +47,10 @@ int main()
 {
     defineset mandle;
 
+    vector<int> xvalues;
+    vector<int> yvalues;
+    vector<int> mvalues;
+    vector<int>colorvals;
     // find max pixels of y and x
     int xpixels = sf::VideoMode::getDesktopMode().width;
     int ypixels = sf::VideoMode::getDesktopMode().height;
@@ -59,9 +64,20 @@ int main()
     //define pixels for madel set
     for (int x = 0; x < xpixels;x++) {
         for (int y = 0; y < ypixels; y++) {
-            //convert cordinates to complex???? 
+            //convert cordinates to complex???? using imaginary grid
         complex<float> c = (RE_START + (x / xpixels) * (RE_END - RE_START));
             IM_START + (y / ypixels) * (IM_END - IM_START);
+            // returns the iterations value
+            int m = mandle.mandelbrot(c);
+            // color to iterations
+            int color = 255 - int(m * 255 / 80);
+            xvalues.push_back(x);
+            mvalues.push_back(m);
+            yvalues.push_back(y);
+            colorvals.push_back(color);
+
+
+
         }
     }
 
@@ -85,9 +101,16 @@ int main()
     // run the program as long as the window is open
     while (window.isOpen())
     {
-        ///test4
+        
+        for (int x = 0; x < xpixels; x++) {
+            for (int y = 0; y < ypixels; y++) {
+                sf::Color::Color(0, 0, 0, mvalues.at(x + y));
+                rectangle7.setOutlineColor(sf::Color(0, 0, 0, mvalues.at(x + y)));
+                rectangle7.setPosition(x, y);
+                window.draw(rectangle7);
 
-
+            }
+        }
 
 
         // check all the window's events that were triggered since the last iteration of the loop
@@ -99,8 +122,7 @@ int main()
             {
 
 
-
-
+               
 
 
 
@@ -126,7 +148,16 @@ int main()
 
     window.display();
         //everything renders here
-    window.draw(rectangle7);
+    
+    for (int x = 0; x < xpixels; x++) {
+        for (int y = 0; y < ypixels; y++) {
+            sf::Color::Color(0, 0, 0, mvalues.at(x + y));
+            rectangle7.setOutlineColor(sf::Color(0, 0, 0, mvalues.at(x + y)));
+            rectangle7.setPosition(x, y);
+            window.draw(rectangle7);
+
+        }
+    }
 
 
     }
