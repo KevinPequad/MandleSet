@@ -2,40 +2,68 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>     // std::cout
-#include <complex>      // std::complex, std::abs
+#include <complex> 
+// std::complex, std::abs
 using namespace std;
 using namespace sf;
 
-int countIterations(Vector2f coord)
-{
-    complex<float> c = { coord.x, coord.y };
+class defineset {
+public:
+    int MAX_ITER = 80;
+    int mandelbrot(complex<float> c) 
+    {
+        float z = 0;
+        int n = 0;
+        while(abs(z) <= 2 && n < MAX_ITER){
+        z = z * z + c;
+        n += 1;
+        return n;
+        }
+     
 
-    ///while(abs(z) < 2.0 && counter < MAX_ITER)
-        ///z = z*z + coord
-}
+    }
+private:
 
+};
+//reference
+//iterate this 100 times or less for colors until 2 < or > z
+// magically puts x and y cords into a magic number
+
+//int defineset::countIterations(Vector2f coord)
+//{
+//    complex<float> c = { coord.x, coord.y };
+
+ //   while (abs(z) < 2.0 && counter < MAX_ITER) {
+ //   z = z * z + coord;
+ //   }
+//}
+
+    
+    
+    
+ 
 int main()
 {
-    //include these later in Complex plane
-    const unsigned int MAX_ITER = 64;
-    const float BASE_WIDTH = 4.0;
-    const float BASE_HEIGHT = 4.0;
-    const float BASE_ZOOM = 0.5;
+    defineset mandle;
 
-    double re = -0.77568377;
-    double im = 0.13646737;
-    complex<double> c(re, im);
-    complex<double> z(0,0);
-    cout << "c = " << c << "\t";
-    cout << "|c| = " << abs(c) << endl;
-    cout << "Real component of c: " << c.real() << endl;
-    cout << "Imaginary component of c: " << c.imag() << endl;
-    z = z * z + c;
-    cout << "z_2 = " << z << "\t";
-    cout << "|z_2| = " << abs(z) << endl;
-    z = z * z + c;
-    cout << "z_3 = " << z << "\t";
-    cout << "|z_3| = " << abs(z) << endl;
+    // find max pixels of y and x
+    int xpixels = sf::VideoMode::getDesktopMode().width;
+    int ypixels = sf::VideoMode::getDesktopMode().height;
+
+    // Fake imaginary Plot window
+    int  RE_START = -2;
+    int  RE_END = 1;
+    int IM_START = -1;
+    int IM_END = 1;
+   
+    //define pixels for madel set
+    for (int x = 0; x < xpixels;x++) {
+        for (int y = 0; y < ypixels; y++) {
+            //convert cordinates to complex???? 
+        complex<float> c = (RE_START + (x / xpixels) * (RE_END - RE_START));
+            IM_START + (y / ypixels) * (IM_END - IM_START);
+        }
+    }
 
     sf::RectangleShape rectangle7;
     sf::Vector2f rectangleposition7(0, 0);
@@ -45,10 +73,10 @@ int main()
     rectangle7.setPosition(rectangleposition7);
 
 
-    //finds monitor ratio display
-    int xpixels = sf::VideoMode::getDesktopMode().width;
-    int ypixels = sf::VideoMode::getDesktopMode().height;
+   
     
+    
+
     // Create a window with the same pixel depth as the desktop
     sf::RenderWindow window;
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
@@ -57,10 +85,8 @@ int main()
     // run the program as long as the window is open
     while (window.isOpen())
     {
-
-
-
         ///test4
+
 
 
 
