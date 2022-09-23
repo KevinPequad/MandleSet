@@ -129,7 +129,18 @@ int main()
 
 
 
+                for (double x = 0; x < xpixels; x++) {
+                    for (double y = 0; y < ypixels; y++) {
 
+                        rectangle7.setOutlineColor(sf::Color(0, colorvals.at(x + y), 0, 0));
+                        rectangle7.setPosition(x, y);
+                        
+                        cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
+
+
+                    }
+                }
+            }
 
 
 
@@ -150,18 +161,7 @@ int main()
         window.display();
         //everything renders here
 
-       for (double x = 0; x < xpixels; x++) {
-            for (double y = 0; y < ypixels; y++) {
-
-                rectangle7.setOutlineColor(sf::Color(0, colorvals.at(x + y), 0, 0));
-                rectangle7.setPosition(x, y);
-                window.draw(rectangle7);
-                cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x+y) << endl;
-
-
-            }
-        }
-    }
+        window.draw(rectangle7);
 
     
 }
