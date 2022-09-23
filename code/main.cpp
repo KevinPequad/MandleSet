@@ -56,8 +56,8 @@ int main()
     sf::RectangleShape rectangle7;
     sf::Vector2f rectangleposition7(0, 0);
     rectangle7.setSize(sf::Vector2f(1, 1));
-    rectangle7.setOutlineColor(sf::Color::White);
-    rectangle7.setOutlineThickness(1);
+    
+    
     rectangle7.setPosition(rectangleposition7);
 
 
@@ -74,10 +74,10 @@ int main()
     const float RE_END = 1;
     const float IM_START = -1;
     const float IM_END = 1;
-   
+
     //define pixels for madel set
-    for (float x = 0.0; x < xpixels;x+=1.00) {
-        for (float y = 0.0; y < ypixels; y+=1.00) {
+    for (float x = 0.0; x < xpixels; x += 1.00) {
+        for (float y = 0.0; y < ypixels; y += 1.00) {
             //convert cordinates to complex???? using imaginary grid
             complex<float> c = { RE_START + (x / xpixels) * (RE_END - RE_START) ,
              IM_START + (y / ypixels) * (IM_END - IM_START) };
@@ -90,18 +90,18 @@ int main()
             cout << "complex: " << c << " " << m << " iterations at x=" << x << " at y =" << y << " colorvalues:" << color << endl;
             yvalues.push_back(y);
             colorvals.push_back(color);
-            
+
 
 
         }
     }
 
-    
 
 
-   
-    
-    
+
+
+
+
 
     // Create a window with the same pixel depth as the desktop
     sf::RenderWindow window;
@@ -129,17 +129,7 @@ int main()
 
 
 
-                for (double x = 0; x < xpixels; x++) {
-                    for (double y = 0; y < ypixels; y++) {
 
-                        rectangle7.setOutlineColor(sf::Color(0, colorvals.at(x + y), 0, 0));
-                        rectangle7.setPosition(x, y);
-                        
-                        cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
-
-
-                    }
-                }
             }
 
 
@@ -150,18 +140,30 @@ int main()
 
 
 
-                // "close requested" event: we close the window
-                if (event.type == sf::Event::Closed)
-                    window.close();
-            }
-
-
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed)
+                window.close();
         }
+
+
+    
 
         window.display();
         //everything renders here
 
-        window.draw(rectangle7);
+        for (double x = 0; x < xpixels; x++) 
+            {
+        for (double y = 0; y < ypixels; y++) 
+        {
 
-    
+            rectangle7.setFillColor(sf::Color(0, 125, 0, colorvals.at(x + y)));
+            rectangle7.setPosition(x, y);
+            window.draw(rectangle7);
+            cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
+
+
+            }
+        }
+
+    }
 }
