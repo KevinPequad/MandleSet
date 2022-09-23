@@ -84,7 +84,7 @@ int main()
             // returns the iterations value
             int m = mandle.mandelbrot(c);
             // color to iterations
-            int color = 255 - (m * 255 / 64);
+            int color = 255 - (m * (255 / 64));
             xvalues.push_back(x);
             mvalues.push_back(m);
             cout << "complex: " << c << " " << m << " iterations at x=" << x << " at y =" << y << " colorvalues:" << color << endl;
@@ -153,9 +153,10 @@ int main()
        for (double x = 0; x < xpixels; x++) {
             for (double y = 0; y < ypixels; y++) {
 
-                rectangle7.setOutlineColor(sf::Color(0, 0, 0, colorvals.at(x + y)));
+                rectangle7.setOutlineColor(sf::Color(0, colorvals.at(x + y), 0, 0));
                 rectangle7.setPosition(x, y);
                 window.draw(rectangle7);
+                cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x+y) << endl;
 
 
             }
