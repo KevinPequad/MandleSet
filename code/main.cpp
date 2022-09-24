@@ -12,11 +12,11 @@ public:
     int MAX_ITER = 64;
     int mandelbrot(complex<float> c) 
     {
-        complex<float> z;
+        complex<float> z = {0,0};
         for (int i = 0; i < MAX_ITER; i++) {
-
-            z = z* z + c;
-            if(abs(z) >= 2)
+            //cout <<  z << c << endl;;
+            z = z * z + c;
+            if (abs(z) >= 2)
             {
                 return i;
             }
