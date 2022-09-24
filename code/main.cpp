@@ -3,13 +3,14 @@
 #include <iostream>
 #include <vector>     // std::cout
 #include <complex> 
+#include <algorithm>
 // std::complex, std::abs
 using namespace std;
 using namespace sf;
 
 class defineset {
 public:
-    int MAX_ITER = 64;
+    int MAX_ITER = 255;
     int mandelbrot(complex<float> c) 
     {
         complex<float> z = {0,0};
@@ -85,14 +86,14 @@ int main()
              y_START + (y / ypixels * (y_END - y_START))};
             // returns the iterations value
             int m = mandle.mandelbrot(c);
-            // color to iterations
+            
 
-            int color = m;
-            xvalues.push_back(x);
+        
+            /**/xvalues.push_back(x);
             mvalues.push_back(m);
-            yvalues.push_back(y);
+            yvalues.push_back(y); 
 
-            colorvals.push_back(color);
+            
             //cout << "complex: " << c << " " << m << " iterations at x=" << x << " at y =" << y << " colorvalues:" << color << endl;
             
 
@@ -161,7 +162,7 @@ int main()
         for (double y = 0; y < ypixels; y++) 
         {
 
-            rectangle7.setFillColor(sf::Color(0, colorvals.at(x + y) * 100, 0));
+            rectangle7.setFillColor(sf::Color(0, mvalues.at(x + y) * 100, 0));
             rectangle7.setPosition(x, y);
             window.draw(rectangle7);
             //cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
