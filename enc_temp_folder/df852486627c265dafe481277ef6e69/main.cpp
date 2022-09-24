@@ -16,7 +16,7 @@ public:
         for (int i = 0; i < MAX_ITER; i++) {
 
             z = z* z + c;
-            if(abs(z) >= 2)
+            if(abs(z) > 2)
             {
                 return i;
             }
