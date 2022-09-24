@@ -9,18 +9,19 @@ using namespace sf;
 
 class defineset {
 public:
-    int MAX_ITER = 64;
+    int MAX_ITER = 255;
     int mandelbrot(complex<float> c) 
     {
-        complex<float> z;
-        int n = 0;
-        while (abs(z) <= 2 && n < MAX_ITER) {
-            z = z * z + c;
-            n += 1;
-            
-            
+        complex<float> z(0,0);
+        for (int i = 0; i < 255; i++) {
+
+            z = z* z + c;
+            if(abs(z) >= 2)
+            {
+                return i;
+            }
         }
-        return n;
+        return 0;
         
         
         
@@ -58,7 +59,7 @@ int main()
     rectangle7.setSize(sf::Vector2f(1, 1));
     
     
-    rectangle7.setPosition(rectangleposition7);
+   
 
 
     vector<int> xvalues;
@@ -70,26 +71,29 @@ int main()
     int ypixels = 400;//sf::VideoMode::getDesktopMode().height;
 
     // Fake imaginary Plot window
-    const float  RE_START = -2;
-    const float RE_END = 1;
-    const float IM_START = -1;
-    const float IM_END = 1;
+    const float  x_START = -2;
+    const float x_END = 1;
+    const float y_START = -1;
+    const float y_END = 1;
 
     //define pixels for madel set
     for (float x = 0.0; x < xpixels; x += 1.00) {
         for (float y = 0.0; y < ypixels; y += 1.00) {
             //convert cordinates to complex???? using imaginary grid
-            complex<float> c = { RE_START + (x / xpixels) * (RE_END - RE_START) ,
-             IM_START + (y / ypixels) * (IM_END - IM_START) };
+            complex<float> c = { x_START + (x * ((x_END - x_START)/(xpixels - 1))) ,
+             y_START + (y * ((y_END - y_START)/(ypixels - 1)))};
             // returns the iterations value
             int m = mandle.mandelbrot(c);
             // color to iterations
-            int color = 255 - (m * (255 / 64));
+
+            int color = m;
             xvalues.push_back(x);
             mvalues.push_back(m);
-            cout << "complex: " << c << " " << m << " iterations at x=" << x << " at y =" << y << " colorvalues:" << color << endl;
             yvalues.push_back(y);
+
             colorvals.push_back(color);
+            //cout << "complex: " << c << " " << m << " iterations at x=" << x << " at y =" << y << " colorvalues:" << color << endl;
+            
 
 
 
@@ -156,10 +160,10 @@ int main()
         for (double y = 0; y < ypixels; y++) 
         {
 
-            rectangle7.setFillColor(sf::Color(0, 125, 0, colorvals.at(x + y)));
+            rectangle7.setFillColor(sf::Color(0, colorvals.at(x + y), 0));
             rectangle7.setPosition(x, y);
             window.draw(rectangle7);
-            cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
+            //cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
 
 
             }
