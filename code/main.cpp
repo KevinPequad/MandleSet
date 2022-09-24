@@ -67,10 +67,19 @@ int main()
     vector<int> mvalues;
     vector<int>colorvals;
     // find max pixels of y and x
-    int xpixels = 600;//sf::VideoMode::getDesktopMode().width;
-    int ypixels = 400;//sf::VideoMode::getDesktopMode().height;
+    int xpixels = 1080;//sf::VideoMode::getDesktopMode().width;
+    int ypixels = 720;//sf::VideoMode::getDesktopMode().height;
 
     // Fake imaginary Plot window
+
+    //use for complexplaun.h
+    const unsigned int MAX_ITER = 64;
+    const float BASE_WIDTH = 4.0;
+    const float BASE_HEIGHT = 4.0;
+    //temperary base zoom
+    const float BASE_ZOOM = 1;
+    float n = 1;
+
     const float x_START = -2;
     const float x_END = 2;
     const float y_START = -2;
@@ -81,8 +90,8 @@ int main()
         for (int i = 0; i < ypixels; i++) {
 
             //convert cordinates to complex???? using imaginary grid
-            complex<float> c = { x_START + j * ((x_END - x_START) / (xpixels - 1)) ,
-            (y_START + i*(y_END - y_START)/(ypixels - 1))};
+            complex<float> c = { x_START + j * ((BASE_WIDTH * pow(BASE_ZOOM,n)) / (xpixels - 1)) ,
+            (y_START + i*(BASE_HEIGHT* pow(BASE_ZOOM,n))/(ypixels - 1))};
             
                 //returns iterations
             
@@ -159,7 +168,7 @@ int main()
         for (int y = 0; y < ypixels; y++) 
             {
 
-            rectangle7.setFillColor(sf::Color(0,  mvalues.at(x + y * xpixels ), 0));
+            rectangle7.setFillColor(sf::Color(mvalues.at(x + y * xpixels),  mvalues.at(x + y * xpixels)* 100, mvalues.at(x + y * xpixels)));
             rectangle7.setPosition(x, y);
             window.draw(rectangle7);
             //cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
