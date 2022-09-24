@@ -167,13 +167,27 @@ int main()
         {
         for (int y = 0; y < ypixels; y++) 
             {
+            /* could use to assign RGB values
+            if (value == 100) { cout << " "; }
+            else if (value > 90) { cout << red << char_; }
+            else if (value > 70) { cout << l_red << char_; }
+            else if (value > 50) { cout << orange << char_; }
+            else if (value > 30) { cout << yellow << char_; }
+            else if (value > 20) { cout << l_green << char_; }
+            else if (value > 10) { cout << green << char_; }
+            else if (value > 5) { cout << l_cyan << char_; }
+            else if (value > 4) { cout << cyan << char_; }
+            else if (value > 3) { cout << l_blue << char_; }
+            else if (value > 2) { cout << blue << char_; }
+            else if (value > 1) { cout << magenta << char_; }
+            else { cout << l_magenta << char_; }
+            */
 
-            rectangle7.setFillColor(sf::Color(mvalues.at(x + y * xpixels),  mvalues.at(x + y * xpixels)* 100, mvalues.at(x + y * xpixels)));
+            rectangle7.setFillColor(sf::Color(mvalues.at(x + y * xpixels),  mvalues.at(x + y * xpixels), mvalues.at(x + y * xpixels)));
             rectangle7.setPosition(x, y);
             window.draw(rectangle7);
             //cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
-
-
+            
             }
         }
 
