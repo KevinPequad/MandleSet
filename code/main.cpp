@@ -33,18 +33,7 @@ public:
 private:
 
 };
-//reference
-//iterate this 100 times or less for colors until 2 < or > z
-// magically puts x and y cords into a magic number
 
-//int defineset::countIterations(Vector2f coord)
-//{
-//    complex<float> c = { coord.x, coord.y };
-
- //   while (abs(z) < 2.0 && counter < MAX_ITER) {
- //   z = z * z + coord;
- //   }
-//}
 
     
     
@@ -59,7 +48,7 @@ int main()
     rectangle7.setSize(sf::Vector2f(1, 1));
     
     
-   
+    sf::Vector2f mouseposition;
 
     sf::Vector2f vArray;
     vector<int> xvalues;
@@ -72,13 +61,12 @@ int main()
 
     // Fake imaginary Plot window
 
-    //use for complexplaun.h
+    //use for complexplex.h
     const unsigned int MAX_ITER = 64;
     const float BASE_WIDTH = 4.0;
     const float BASE_HEIGHT = 4.0;
-    //temperary base zoom
-    const float BASE_ZOOM = 1;
-    float n = 1;
+    const float BASE_ZOOM = 0.5;
+    float n = 0;
 
     const float x_START = -2;
     const float x_END = 2;
@@ -131,11 +119,11 @@ int main()
         while (window.pollEvent(event))
         {
 
-            if (event.type == sf::Event::MouseButtonPressed)
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
+                n = n - 1;
 
-
-
+                sf::Vector2i position = sf::Mouse::getPosition();
 
 
 
@@ -143,7 +131,18 @@ int main()
 
 
             }
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+            {
+                n = n + 1;
 
+                sf::Vector2i position = sf::Mouse::getPosition();
+
+
+
+
+
+
+            }
 
 
 
