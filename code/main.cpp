@@ -109,7 +109,7 @@ int main()
     // Create a window with the same pixel depth as the desktop
     sf::RenderWindow window;
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-    window.create(sf::VideoMode(600, 400), "SFML window");
+    window.create(sf::VideoMode(xpixels, ypixels), "SFML window");
     window.setFramerateLimit(60);
     // run the program as long as the window is open
     while (window.isOpen())
@@ -159,7 +159,7 @@ int main()
         for (int y = 0; y < ypixels; y++) 
             {
 
-            rectangle7.setFillColor(sf::Color(0,  mvalues.at(y + x )) * 100, 0));
+            rectangle7.setFillColor(sf::Color(0,  mvalues.at(x + y * xpixels ), 0));
             rectangle7.setPosition(x, y);
             window.draw(rectangle7);
             //cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
