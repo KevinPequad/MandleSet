@@ -10,11 +10,12 @@ using namespace sf;
 
 class defineset {
 public:
-    sf::Vector2f mouseposition;
+
+    sf::Vector2i mouseposition;
     sf::Vector2f vArray;
     vector<int> mvalues;
 
-    // find max pixels of y and x
+    
     int xpixels = 900;//sf::VideoMode::getDesktopMode().width;
     int ypixels = 600; //sf::VideoMode::getDesktopMode().height;
     const unsigned int MAX_ITER = 64;
@@ -22,7 +23,10 @@ public:
     const float BASE_HEIGHT = 4.0;
     const float BASE_ZOOM = 0.5;
     float n = 0;
+    sf::Vector2f mousecords;
+    //Functions
 
+  
 
     vector<int> returniterations() {
         mvalues.clear();
@@ -33,7 +37,7 @@ public:
                 //convert cordinates to complex
                 complex<float> c = { -(BASE_WIDTH/2) + j * ((BASE_WIDTH * pow(BASE_ZOOM,n)) / (xpixels - 1)) ,
                 (-(BASE_HEIGHT/2) + i * (BASE_HEIGHT * pow(BASE_ZOOM,n)) / (ypixels - 1))};
-                
+               
 
                 //returns iterations
 
@@ -104,7 +108,7 @@ int main()
     sf::RenderWindow window;
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     window.create(sf::VideoMode(mandle.xpixels, mandle.ypixels), "SFML window");
-    window.setFramerateLimit(1);
+    window.setFramerateLimit(60);
     // run the program as long as the window is open
     while (window.isOpen())
     {
@@ -120,9 +124,11 @@ int main()
             {
                 cout << "left clicked" << endl;
                 mandle.n = mandle.n - 1;
+                mandle.mouseposition = sf::Mouse::getPosition();
                 ivalues = mandle.returniterations();
-                sf::Vector2i position = sf::Mouse::getPosition();
+                
 
+                
 
 
 
@@ -132,11 +138,13 @@ int main()
             if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
             {
                 cout << "right clicked" << endl;
+                
                 mandle.n = mandle.n + 1;
+                mandle.mouseposition = sf::Mouse::getPosition();
                 ivalues = mandle.returniterations();
-                sf::Vector2i position = sf::Mouse::getPosition();
+                 
 
-
+                
 
 
 
@@ -151,6 +159,10 @@ int main()
 
 
             // "close requested" event: we close the window
+            if (Keyboard::isKeyPressed(Keyboard::Escape)){
+                window.close();
+            };
+               
             if (event.type == sf::Event::Closed)
                 window.close();
         }
@@ -165,26 +177,9 @@ int main()
         {
         for (int y = 0; y < mandle.ypixels; y++) 
             {
-            /* 
-            
-            could use to assign RGB values
-            if (value == 100) { cout << " "; }
-            else if (value > 90) { cout << red << char_; }
-            else if (value > 70) { cout << l_red << char_; }
-            else if (value > 50) { cout << orange << char_; }
-            else if (value > 30) { cout << yellow << char_; }
-            else if (value > 20) { cout << l_green << char_; }
-            else if (value > 10) { cout << green << char_; }
-            else if (value > 5) { cout << l_cyan << char_; }
-            else if (value > 4) { cout << cyan << char_; }
-            else if (value > 3) { cout << l_blue << char_; }
-            else if (value > 2) { cout << blue << char_; }
-            else if (value > 1) { cout << magenta << char_; }
-            else { cout << l_magenta << char_; }
-            
-            */
-
-            rectangle7.setFillColor(sf::Color(ivalues.at(x+ y * mandle.xpixels), 0, 0));
+          
+            int t = ivalues.at(x + y * mandle.xpixels);
+            rectangle7.setFillColor(sf::Color(9 * (1 - t) * pow(t, 3), 15 * pow((1 - t), 2) * pow(t, 3) ,8.5 * pow((1 - t), 3) * t));
             rectangle7.setPosition(x, y);
             window.draw(rectangle7);
 
