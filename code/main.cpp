@@ -4,6 +4,7 @@
 #include <vector>     // std::cout
 #include <complex> 
 #include <algorithm>
+
 // std::complex, std::abs
 using namespace std;
 using namespace sf;
@@ -29,11 +30,12 @@ public:
     
     sf::Vector2f mousecords;
     //Functions
-
+    
     
 
 
     int mandelbrot(complex<float> c, int MAX_ITER)
+        
     {
         
         complex<float> z;
@@ -57,7 +59,7 @@ public:
     
     
 private:
-  
+    
 };
 
 
@@ -77,8 +79,9 @@ int main()
     vector<int> ivalues;
 
     
+   
     
-    
+
 
 
     // Create a window with the same pixel depth as the desktop
@@ -122,7 +125,7 @@ int main()
                 mandle.calculate = true;               
             }
             if (Keyboard::isKeyPressed(Keyboard::A)) {
-                mandle.yset += 40 * mandle.BASE_ZOOM;
+                mandle.xset -= 40 * mandle.BASE_ZOOM;
                  mandle.calculate = true;
             }
             if (Keyboard::isKeyPressed(Keyboard::W)) {
@@ -130,7 +133,7 @@ int main()
                 mandle.calculate = true;
             }
             if (Keyboard::isKeyPressed(Keyboard::S)) {
-                mandle.xset -= 40 * mandle.BASE_ZOOM;
+                mandle.yset += 40 * mandle.BASE_ZOOM;
                 mandle.calculate = true;
             }
             if (Keyboard::isKeyPressed(Keyboard::D)) {
