@@ -120,14 +120,14 @@ int main()
 
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
-                cout << "left clicked" << endl;
+                //cout << "left clicked" << endl;
               
                 mandle.BASE_ZOOM /= 0.9;                                                   
                 mandle.calculate = true;                                                         
             }
             if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
             {
-                cout << "right clicked" << endl;
+                //cout << "right clicked" << endl;
                 
                 mandle.BASE_ZOOM *= 0.9;                           
                 mandle.calculate = true;               
