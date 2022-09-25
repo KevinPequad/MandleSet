@@ -10,14 +10,16 @@ using namespace sf;
 
 class defineset {
 public:
-
+    bool calculate = true;
     sf::Vector2i mouseposition;
     sf::Vector2f vArray;
     vector<int> mvalues;
-
+    
     
     int xpixels = 900;//sf::VideoMode::getDesktopMode().width;
     int ypixels = 600; //sf::VideoMode::getDesktopMode().height;
+    float ratio = ypixels / xpixels;
+
     const unsigned int MAX_ITER = 64;
     const float BASE_WIDTH = 4.0;
     const float BASE_HEIGHT = 4.0;
@@ -26,7 +28,10 @@ public:
     sf::Vector2f mousecords;
     //Functions
 
-  
+    int flip(int xpixels,int ypixels) {
+
+
+  }
 
     vector<int> returniterations() {
         mvalues.clear();
@@ -123,9 +128,12 @@ int main()
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
                 cout << "left clicked" << endl;
+              
                 mandle.n = mandle.n - 1;
                 mandle.mouseposition = sf::Mouse::getPosition();
+                mandle.calculate = true;
                 ivalues = mandle.returniterations();
+                
                 
 
                 
@@ -141,6 +149,7 @@ int main()
                 
                 mandle.n = mandle.n + 1;
                 mandle.mouseposition = sf::Mouse::getPosition();
+                mandle.calculate = true;
                 ivalues = mandle.returniterations();
                  
 
@@ -172,21 +181,22 @@ int main()
 
         window.display();
         //everything renders here
-
-        for (int x = 0; x < mandle.xpixels; x++) 
-        {
-        for (int y = 0; y < mandle.ypixels; y++) 
+        if (mandle.calculate = true) {
+            for (int x = 0; x < mandle.xpixels; x++)
             {
-          
-            int t = ivalues.at(x + y * mandle.xpixels);
-            rectangle7.setFillColor(sf::Color(9 * (1 - t) * pow(t, 3), 15 * pow((1 - t), 2) * pow(t, 3) ,8.5 * pow((1 - t), 3) * t));
-            rectangle7.setPosition(x, y);
-            window.draw(rectangle7);
+                for (int y = 0; y < mandle.ypixels; y++)
+                {
 
-            //cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
-            
+                    int t = ivalues.at(x + y * mandle.xpixels);
+                    rectangle7.setFillColor(sf::Color(9 * (1 - t) * pow(t, 3), 15 * pow((1 - t), 2) * pow(t, 3), 8.5 * pow((1 - t), 3) * t));
+                    rectangle7.setPosition(x, y);
+                    window.draw(rectangle7);
+
+                    //cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
+
+                }
             }
+            mandle.calculate = false;
         }
-
     }
 }
