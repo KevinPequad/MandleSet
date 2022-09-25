@@ -4,12 +4,13 @@
 #include <vector>     // std::cout
 #include <complex> 
 #include <algorithm>
+#include <thread>
 
 // std::complex, std::abs
 using namespace std;
 using namespace sf;
 
-class defineset {
+class defineset  {
 public:
     
     bool calculate = true;
@@ -27,7 +28,9 @@ public:
     const float BASE_WIDTH = 4.0;
     const float BASE_HEIGHT = 4.0;
     float BASE_ZOOM = 0.004;
-    
+    sf::RectangleShape rectangle7;
+
+   
     sf::Vector2f mousecords;
     //Functions
     
@@ -66,9 +69,7 @@ public:
             (y - xpixels / 2)* BASE_ZOOM + yset };
        return c;
     }
-            
-    
-    
+   
     
 private:
     
@@ -98,8 +99,7 @@ int main()
 
     sf::Color(0, 0, 0);
    
-    
-
+   
 
 
     // Create a window with the same pixel depth as the desktop
@@ -111,7 +111,7 @@ int main()
     while (window.isOpen())
     {
 
-     
+        
 
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
@@ -123,17 +123,7 @@ int main()
                 cout << "left clicked" << endl;
               
                 mandle.BASE_ZOOM /= 0.9;                                                   
-                mandle.calculate = true;
-                
-                
-                
-
-                
-
-
-
-
-
+                mandle.calculate = true;                                                         
             }
             if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
             {
@@ -179,20 +169,22 @@ int main()
 
         window.display();
         //everything renders here
-        if (mandle.calculate == true) {
-            window.clear();
-            cout << "redering" << endl;
+        //if (mandle.calculate == true) {
+            
+            //cout << "redering" << endl;
             for (int x = 0; x < mandle.xpixels; x++)
             {
                 for (int y = 0; y < mandle.ypixels; y++)
                 {
                     complex<float> c = mandle.convertxytocomplex(x, y);
                     
-                    int t = mandle.mandelbrot(c,mandle.MAX_ITER);
+                    double t = mandle.mandelbrot(c,mandle.MAX_ITER);
                     
                     rectangle7.setFillColor(mandle.Madelbrot(t));
+
                     rectangle7.setPosition(x, y);
                     window.draw(rectangle7);
+
                     
                     //cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
 
@@ -201,8 +193,8 @@ int main()
                    //cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
                           
             mandle.calculate = false;
-            cout << "done rendering" << endl;
+            //cout << "done rendering" << endl;
             
-        }
+       // }
     }
 }
