@@ -101,13 +101,7 @@ int main()
             {
                 cout << "left clicked" << endl;
               
-                mandle.BASE_ZOOM /= 0.9;
-                mandle.mouseposition = sf::Mouse::getPosition();
-                mandle.xset += mandle.BASE_ZOOM  ;
-                mandle.yset += mandle.BASE_ZOOM ;
-                
-                
-                
+                mandle.BASE_ZOOM /= 0.9;                                                   
                 mandle.calculate = true;
                 
                 
@@ -124,27 +118,25 @@ int main()
             {
                 cout << "right clicked" << endl;
                 
-                mandle.BASE_ZOOM *= 0.9;
-                //mandle.yset += mandle.BASE_ZOOM * 40;
-                mandle.mouseposition = sf::Mouse::getPosition();
-                //cout << mandle.mouseposition.x << mandle.mouseposition.y << endl;
-                mandle.xset -= mandle.BASE_ZOOM * ((mandle.mouseposition.x - mandle.xpixels/2)/20);
-                mandle.yset += mandle.BASE_ZOOM * (mandle.mouseposition.y - mandle.ypixels/2)/20;
-                
-                //mandle.yset += mandle.BASE_ZOOM * 40;
-                //mandle.ypixels = mandle.ypixels/mouseposition.y ;
-               
-                mandle.calculate = true;
-                
-                 
-
-                
-
-
-
-
+                mandle.BASE_ZOOM *= 0.9;                           
+                mandle.calculate = true;               
             }
-
+            if (Keyboard::isKeyPressed(Keyboard::A)) {
+                mandle.yset += 40 * mandle.BASE_ZOOM;
+                 mandle.calculate = true;
+            }
+            if (Keyboard::isKeyPressed(Keyboard::W)) {
+                mandle.yset -= 40 * mandle.BASE_ZOOM;
+                mandle.calculate = true;
+            }
+            if (Keyboard::isKeyPressed(Keyboard::S)) {
+                mandle.xset -= 40 * mandle.BASE_ZOOM;
+                mandle.calculate = true;
+            }
+            if (Keyboard::isKeyPressed(Keyboard::D)) {
+                mandle.xset += 40 * mandle.BASE_ZOOM;
+                mandle.calculate = true;
+            }
 
 
 
