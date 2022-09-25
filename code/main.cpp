@@ -10,11 +10,13 @@ using namespace sf;
 
 class defineset {
 public:
+    
     bool calculate = true;
     sf::Vector2i mouseposition;
     sf::Vector2f vArray;
     vector<int> mvalues;
-    
+    float xset = -0.5;
+    float yset = 0.5;
     
     int xpixels = 900;//sf::VideoMode::getDesktopMode().width;
     int ypixels = 600; //sf::VideoMode::getDesktopMode().height;
@@ -23,44 +25,14 @@ public:
     const unsigned int MAX_ITER = 64;
     const float BASE_WIDTH = 4.0;
     const float BASE_HEIGHT = 4.0;
-    const float BASE_ZOOM = 0.5;
-    float n = 0;
+    float BASE_ZOOM = 0.004;
+    
     sf::Vector2f mousecords;
     //Functions
 
-    int flip(int xpixels,int ypixels) {
+    
 
 
-  }
-
-    vector<int> returniterations() {
-        mvalues.clear();
-        cout << "Calculating" << endl; //Change this to a font when finished
-        for (int j = 0; j < xpixels; j++) {
-            for (int i = 0; i < ypixels; i++) {
-
-                //convert cordinates to complex
-                complex<float> c = { -(BASE_WIDTH/2) + j * ((BASE_WIDTH * pow(BASE_ZOOM,n)) / (xpixels - 1)) ,
-                (-(BASE_HEIGHT/2) + i * (BASE_HEIGHT * pow(BASE_ZOOM,n)) / (ypixels - 1))};
-               
-
-                //returns iterations
-
-                int m = mandelbrot(c, MAX_ITER);
-                mvalues.push_back(m);
-                
-                
-
-                //cout << "complex: " << c << " " << m << " iterations at x=" << x << " at y =" << y << " colorvalues:" << color << endl;
-
-
-
-
-            }
-        }
-        cout << "Calculating Finished" << endl;
-        return mvalues;
-    }
     int mandelbrot(complex<float> c, int MAX_ITER)
     {
         
@@ -104,7 +76,7 @@ int main()
     sf::Vector2f vArray;
     vector<int> ivalues;
 
-    ivalues = (mandle.returniterations());
+    
     
     
 
@@ -129,10 +101,15 @@ int main()
             {
                 cout << "left clicked" << endl;
               
-                mandle.n = mandle.n - 1;
+                mandle.BASE_ZOOM /= 0.9;
                 mandle.mouseposition = sf::Mouse::getPosition();
+                mandle.xset += mandle.BASE_ZOOM * (mandle.mouseposition.x / 2);
+                mandle.yset += mandle.BASE_ZOOM * (mandle.mouseposition.y / 2);
+                
+                
+                
                 mandle.calculate = true;
-                ivalues = mandle.returniterations();
+                
                 
                 
 
@@ -147,10 +124,18 @@ int main()
             {
                 cout << "right clicked" << endl;
                 
-                mandle.n = mandle.n + 1;
+                mandle.BASE_ZOOM *= 0.9;
+                //mandle.yset += mandle.BASE_ZOOM * 40;
                 mandle.mouseposition = sf::Mouse::getPosition();
+                //cout << mandle.mouseposition.x << mandle.mouseposition.y << endl;
+                //mandle.xset += mandle.BASE_ZOOM * (mandle.mouseposition.x - mandle.xpixels/2);
+               // mandle.yset += mandle.BASE_ZOOM * (mandle.mouseposition.y - mandle.ypixels/2);
+                
+                //mandle.yset += mandle.BASE_ZOOM * 40;
+                //mandle.ypixels = mandle.ypixels/mouseposition.y ;
+               
                 mandle.calculate = true;
-                ivalues = mandle.returniterations();
+                
                  
 
                 
@@ -181,13 +166,17 @@ int main()
 
         window.display();
         //everything renders here
-        if (mandle.calculate = true) {
+        if (mandle.calculate == true) {
+            cout << "redering" << endl;
             for (int x = 0; x < mandle.xpixels; x++)
             {
                 for (int y = 0; y < mandle.ypixels; y++)
                 {
-
-                    int t = ivalues.at(x + y * mandle.xpixels);
+                    complex<float> c =  { (x - mandle.xpixels /2) * mandle.BASE_ZOOM + mandle.xset,
+                        (y - mandle.xpixels / 2) * mandle.BASE_ZOOM + mandle.yset };
+                    
+                    int t = mandle.mandelbrot(c,mandle.MAX_ITER);
+                    
                     rectangle7.setFillColor(sf::Color(9 * (1 - t) * pow(t, 3), 15 * pow((1 - t), 2) * pow(t, 3), 8.5 * pow((1 - t), 3) * t));
                     rectangle7.setPosition(x, y);
                     window.draw(rectangle7);
@@ -197,6 +186,7 @@ int main()
                 }
             }
             mandle.calculate = false;
+            cout << "done rendering" << endl;
         }
     }
 }
