@@ -71,6 +71,10 @@ int main()
 {
     defineset mandle;
 
+    sf::RectangleShape rectangle8;
+    sf::Vector2f rectangleposition8(0, 0);
+    rectangle8.setSize(sf::Vector2f(1, 1));
+
     sf::RectangleShape rectangle7;
     sf::Vector2f rectangleposition7(0, 0);
     rectangle7.setSize(sf::Vector2f(1, 1));
@@ -88,7 +92,7 @@ int main()
     sf::RenderWindow window;
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     window.create(sf::VideoMode(mandle.xpixels, mandle.ypixels), "SFML window");
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(0.0001);
     // run the program as long as the window is open
     while (window.isOpen())
     {
@@ -162,6 +166,7 @@ int main()
         window.display();
         //everything renders here
         if (mandle.calculate == true) {
+            window.clear();
             cout << "redering" << endl;
             for (int x = 0; x < mandle.xpixels; x++)
             {
@@ -175,13 +180,33 @@ int main()
                     rectangle7.setFillColor(sf::Color(9 * (1 - t) * pow(t, 3), 15 * pow((1 - t), 2) * pow(t, 3), 8.5 * pow((1 - t), 3) * t));
                     rectangle7.setPosition(x, y);
                     window.draw(rectangle7);
-
+                    
                     //cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
 
                 }
             }
+            for (int x = 0; x < mandle.xpixels; x++)
+            {
+                for (int y = 0; y < mandle.ypixels; y++)
+                {
+                    complex<float> c = { (x - mandle.xpixels / 2) * mandle.BASE_ZOOM + mandle.xset,
+                        (y - mandle.xpixels / 2) * mandle.BASE_ZOOM + mandle.yset };
+
+                    int t = mandle.mandelbrot(c, mandle.MAX_ITER);
+
+                    rectangle8.setFillColor(sf::Color(9 * (1 - t) * pow(t, 3), 15 * pow((1 - t), 2) * pow(t, 3), 8.5 * pow((1 - t), 3) * t));
+                    rectangle8.setPosition(x, y);
+                    window.draw(rectangle8);
+
+                    //cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
+
+                }
+            }         
+                   //cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
+                          
             mandle.calculate = false;
             cout << "done rendering" << endl;
+            
         }
     }
 }
