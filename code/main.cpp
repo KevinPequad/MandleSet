@@ -103,8 +103,8 @@ int main()
               
                 mandle.BASE_ZOOM /= 0.9;
                 mandle.mouseposition = sf::Mouse::getPosition();
-                mandle.xset += mandle.BASE_ZOOM * (mandle.mouseposition.x / 2);
-                mandle.yset += mandle.BASE_ZOOM * (mandle.mouseposition.y / 2);
+                mandle.xset += mandle.BASE_ZOOM  ;
+                mandle.yset += mandle.BASE_ZOOM ;
                 
                 
                 
@@ -128,8 +128,8 @@ int main()
                 //mandle.yset += mandle.BASE_ZOOM * 40;
                 mandle.mouseposition = sf::Mouse::getPosition();
                 //cout << mandle.mouseposition.x << mandle.mouseposition.y << endl;
-                //mandle.xset += mandle.BASE_ZOOM * (mandle.mouseposition.x - mandle.xpixels/2);
-               // mandle.yset += mandle.BASE_ZOOM * (mandle.mouseposition.y - mandle.ypixels/2);
+                mandle.xset -= mandle.BASE_ZOOM * ((mandle.mouseposition.x - mandle.xpixels/2)/20);
+                mandle.yset += mandle.BASE_ZOOM * (mandle.mouseposition.y - mandle.ypixels/2)/20;
                 
                 //mandle.yset += mandle.BASE_ZOOM * 40;
                 //mandle.ypixels = mandle.ypixels/mouseposition.y ;
