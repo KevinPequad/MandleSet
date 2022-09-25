@@ -90,9 +90,7 @@ int main()
     sf::RectangleShape rectangle7;
     sf::Vector2f rectangleposition7(0, 0);
     rectangle7.setSize(sf::Vector2f(1, 1));
-
     sf::Vector2f mouseposition;
-
     sf::Vector2f vArray;
     vector<int> ivalues;
 
