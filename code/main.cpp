@@ -14,9 +14,7 @@ class defineset {
 public:
 
     bool calculate = true;
-    sf::Vector2i mouseposition;
-    sf::Vector2f vArray;
-    vector<int> mvalues;
+    
     float xset = -0.5;
     float yset = 0.5;
 
@@ -28,7 +26,7 @@ public:
     const float BASE_WIDTH = 4.0;
     const float BASE_HEIGHT = 4.0;
     float BASE_ZOOM = 0.004;
-    sf::RectangleShape rectangle7;
+    
 
     
     VertexArray calcuatevetex()
@@ -106,21 +104,8 @@ int main()
 {
     defineset mandle;
 
-    sf::RectangleShape rectangle8;
-    sf::Vector2f rectangleposition8(0, 0);
-    rectangle8.setSize(sf::Vector2f(1, 1));
-
-    sf::RectangleShape rectangle7;
-    sf::Vector2f rectangleposition7(0, 0);
-    rectangle7.setSize(sf::Vector2f(1, 1));
-
-    sf::Vector2f mouseposition;
-
     sf::Vector2f vArray;
-    vector<int> ivalues;
-
-    sf::Color(0, 0, 0);
-   
+         
     VertexArray main;
    
     
@@ -130,7 +115,7 @@ int main()
     sf::RenderWindow window;
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     window.create(sf::VideoMode(mandle.xpixels, mandle.ypixels), "SFML window");
-    window.setFramerateLimit(0);
+    window.setFramerateLimit(60);
     // run the program as long as the window is open
     while (window.isOpen())
     {
