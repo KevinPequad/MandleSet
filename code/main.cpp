@@ -18,11 +18,11 @@ public:
     float xset = -0.5;
     float yset = 0.5;
 
-    int xpixels = 900;//sf::VideoMode::getDesktopMode().width;
-    int ypixels = 600; //sf::VideoMode::getDesktopMode().height;
+    int xpixels = sf::VideoMode::getDesktopMode().width;
+    int ypixels = sf::VideoMode::getDesktopMode().height;
     float ratio = ypixels / xpixels;
 
-    const unsigned int MAX_ITER = 64;
+    const unsigned int MAX_ITER = 500;
     const float BASE_WIDTH = 4.0;
     const float BASE_HEIGHT = 4.0;
     float BASE_ZOOM = 0.004;
