@@ -39,9 +39,7 @@ public:
             {
                 Vector2f point;
                 point.x = j;
-                point.y = i;   
-                
-
+                point.y = i;                  
                 complex<float> c = convertxytocomplex(point);
                 int iter = FindIterationsFromC(c, MAX_ITER);
                 points[j + i * xpixels].position = point;
@@ -86,7 +84,7 @@ public:
     complex<float> convertxytocomplex(Vector2f point) {
        complex<float> c = { (point.x - xpixels / 2)* BASE_ZOOM + xset,
             (point.y - xpixels / 2)* BASE_ZOOM + yset };
-       //
+       
        return c;
     }
    
@@ -108,7 +106,10 @@ int main()
          
     VertexArray main;
    
-    
+    // use these as a thread refernce later when functions are private
+    // 
+    //sf::Thread thread(&defineset::calcuatevetex, &mandle);
+    //thread.launch();
     
 
     // Create a window with the same pixel depth as the desktop
