@@ -67,6 +67,7 @@ public:
     complex<float> convertxytocomplex(int x, int y) {
        complex<float> c = { (x - xpixels / 2)* BASE_ZOOM + xset,
             (y - xpixels / 2)* BASE_ZOOM + yset };
+       //
        return c;
     }
    
@@ -100,7 +101,9 @@ int main()
     sf::Color(0, 0, 0);
    
    
-
+    
+    sf::Thread thread(&defineset::Madelbrot, &mandle);
+    thread.launch();
 
     // Create a window with the same pixel depth as the desktop
     sf::RenderWindow window;
@@ -172,6 +175,10 @@ int main()
         //if (mandle.calculate == true) {
             
             //cout << "redering" << endl;
+
+        //use the view class to covert pixels to complex cordeinates
+        //use vertex array to assign points
+        //draw vertex array
             for (int x = 0; x < mandle.xpixels; x++)
             {
                 for (int y = 0; y < mandle.ypixels; y++)
