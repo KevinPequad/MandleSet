@@ -18,11 +18,11 @@ public:
     float xset = -0.5;
     float yset = 0.5;
 
-    int xpixels = sf::VideoMode::getDesktopMode().width;
-    int ypixels = sf::VideoMode::getDesktopMode().height;
+    int const xpixels = 600;//sf::VideoMode::getDesktopMode().width;
+    int const ypixels = 400;//sf::VideoMode::getDesktopMode().height;
     float ratio = ypixels / xpixels;
 
-    const unsigned int MAX_ITER = 500;
+    const unsigned int MAX_ITER = 64;
     const float BASE_WIDTH = 4.0;
     const float BASE_HEIGHT = 4.0;
     float BASE_ZOOM = 0.004;
@@ -37,13 +37,14 @@ public:
         {
             for (int i = 0; i < ypixels; i++)
             {
-                Vector2f point;
+                
                 point.x = j;
                 point.y = i;                  
-                complex<float> c = convertxytocomplex(point);
-                int iter = FindIterationsFromC(c, MAX_ITER);
-                points[j + i * xpixels].position = point;
-                points[j + i * xpixels].color = ConvertIterToColor(iter);
+                convertxytocomplex();
+                FindIterationsFromC();
+                ConvertIterToColor();
+                points[j + i * xpixels].position = point;               
+                points[j + i * xpixels].color = color;
                 
             }
         }
@@ -52,49 +53,53 @@ public:
    VertexArray recoverarray() {
        VertexArray array = vArray;
        return array;
-   }
-    
-    
-    
-    sf::Color ConvertIterToColor(int iterations) {
-     int t = iterations;
+   }          
+    void ConvertIterToColor() {
+     
+     int t = iter;
      int r = 9 * (1 - t) * pow(t, 3);
      int g = 15 * pow((1 - t), 2) * pow(t, 3);
      int b = 8.5 * pow((1 - t), 3) * t;
-     return sf::Color(r, g, b);
+     color.r = r;
+     color.g = g;
+     color.b = b;
+     
     }
-
-    int defineset::FindIterationsFromC(complex<float> c, int MAX_ITER)
-        
-    {
-        
-        complex<float> z;
-        
+    void defineset::FindIterationsFromC()       
+    {       
+        complex<float> z;      
         for(int i = 0; i < MAX_ITER; i++) {
-            z = z * z + c;
-            
-            
+            z = z * z + c;                   
             if (abs(z) >= 2) {
-                return i;
+             iter = i;
+             break;
+             
             }
-
-          
+            iter = 0;
+            
+                  
         }
-        return 0;
+        
         
         
     }
   
-    complex<float> convertxytocomplex(Vector2f point) {
-       complex<float> c = { (point.x - xpixels / 2)* BASE_ZOOM + xset,
-            (point.y - xpixels / 2)* BASE_ZOOM + yset };
+    void convertxytocomplex() {
+        c = { (point.x - xpixels / 2) * BASE_ZOOM + xset,
+            (point.y - xpixels / 2) * BASE_ZOOM + yset };
+        
+      
        
-       return c;
     }
    
     
 private:
-    sf::VertexArray vArray;
+    VertexArray vArray;
+    Vector2f point;
+    complex<float> c;
+    int iter;
+    Color color;
+    
 };
 
 
@@ -111,10 +116,15 @@ int main()
     VertexArray main;
    
     // use these as a thread refernce later when functions are private
-    // 
+     
     sf::Thread thread(&defineset::calcuatevetex, &mandle);
+    sf::Thread thread1(&defineset::ConvertIterToColor, &mandle);
+    sf::Thread thread2(&defineset::convertxytocomplex, &mandle);
+    sf::Thread thread3(&defineset::FindIterationsFromC, &mandle);
+    thread1.launch();
     thread.launch();
-    
+    thread2.launch();
+    thread3.launch();
 
     // Create a window with the same pixel depth as the desktop
     sf::RenderWindow window;
