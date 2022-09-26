@@ -29,7 +29,7 @@ public:
     
 
     
-    VertexArray calcuatevetex()
+   void calcuatevetex()
     {
         sf::VertexArray points(sf::LineStrip, xpixels + ypixels * xpixels);
         
@@ -44,12 +44,16 @@ public:
                 int iter = FindIterationsFromC(c, MAX_ITER);
                 points[j + i * xpixels].position = point;
                 points[j + i * xpixels].color = ConvertIterToColor(iter);
+                
             }
         }
-        return points;
+        vArray = points;
     }
-
-    //Functions
+   VertexArray recoverarray() {
+       VertexArray array = vArray;
+       return array;
+   }
+    
     
     
     sf::Color ConvertIterToColor(int iterations) {
@@ -90,7 +94,7 @@ public:
    
     
 private:
-    
+    sf::VertexArray vArray;
 };
 
 
@@ -191,7 +195,8 @@ int main()
 
            
         if (mandle.calculate = true) {
-           main = mandle.calcuatevetex();
+           mandle.calcuatevetex();
+           main = mandle.recoverarray();
            
         }                 
          mandle.calculate = false;
