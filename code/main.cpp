@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <thread>
 
+
 // std::complex, std::abs
 using namespace std;
 using namespace sf;
@@ -18,11 +19,11 @@ public:
     float xset = -0.5;
     float yset = 0.5;
 
-    int const xpixels = sf::VideoMode::getDesktopMode().width;
-    int const ypixels = sf::VideoMode::getDesktopMode().height;
+    int const xpixels = 600;//sf::VideoMode::getDesktopMode().width;
+    int const ypixels = 400;//sf::VideoMode::getDesktopMode().height;
     float ratio = ypixels / xpixels;
 
-    const unsigned int MAX_ITER = 64;
+    const unsigned int MAX_ITER = 1000;
     const float BASE_WIDTH = 4.0;
     const float BASE_HEIGHT = 4.0;
     float BASE_ZOOM = 0.004;
@@ -33,9 +34,9 @@ public:
     {
         sf::VertexArray points(sf::LineStrip, xpixels + ypixels * xpixels);
         
-        for (int j = 0; j < xpixels; j++) 
+        for (int j = 0; j <= xpixels; j++) 
         {
-            for (int i = 0; i < ypixels; i++)
+            for (int i = 0; i <= ypixels; i++)
             {
                 
                 point.x = j;
@@ -43,8 +44,8 @@ public:
                 convertxytocomplex();
                 FindIterationsFromC();
                 ConvertIterToColor();
-                points[j + i * xpixels].position = point;               
-                points[j + i * xpixels].color = color;
+                points[j + (i * xpixels)].position = point;               
+                points[j + (i * xpixels)].color = color;
                 
             }
         }
@@ -111,9 +112,10 @@ int main()
 {
     defineset mandle;
 
-    sf::Vector2f vArray;
+    
          
     VertexArray main;
+        
    
     // use these as a thread refernce later when functions are private
      
@@ -127,11 +129,13 @@ int main()
     thread3.launch();
 
     // Create a window with the same pixel depth as the desktop
+
     sf::RenderWindow window;
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     window.create(sf::VideoMode(mandle.xpixels, mandle.ypixels), "SFML window");
     window.setFramerateLimit(60);
     // run the program as long as the window is open
+
     while (window.isOpen())
     {
 
@@ -202,16 +206,18 @@ int main()
         //draw vertex array
         
 
-
+      
            
         if (mandle.calculate = true) {
+                       
            mandle.calcuatevetex();
            main = mandle.recoverarray();
            
         }                 
          mandle.calculate = false;
          window.draw(main);
-
+         
+         
             //cout << "done rendering" << endl;
             
        // }
