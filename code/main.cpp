@@ -18,8 +18,8 @@ public:
     float xset = -0.5;
     float yset = 0.5;
 
-    int const xpixels = 600;//sf::VideoMode::getDesktopMode().width;
-    int const ypixels = 400;//sf::VideoMode::getDesktopMode().height;
+    int const xpixels = sf::VideoMode::getDesktopMode().width;
+    int const ypixels = sf::VideoMode::getDesktopMode().height;
     float ratio = ypixels / xpixels;
 
     const unsigned int MAX_ITER = 64;
