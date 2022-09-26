@@ -10,16 +10,16 @@
 using namespace std;
 using namespace sf;
 
-class defineset  {
+class defineset {
 public:
-    
+
     bool calculate = true;
     sf::Vector2i mouseposition;
     sf::Vector2f vArray;
     vector<int> mvalues;
     float xset = -0.5;
     float yset = 0.5;
-    
+
     int xpixels = 900;//sf::VideoMode::getDesktopMode().width;
     int ypixels = 600; //sf::VideoMode::getDesktopMode().height;
     float ratio = ypixels / xpixels;
@@ -30,12 +30,33 @@ public:
     float BASE_ZOOM = 0.004;
     sf::RectangleShape rectangle7;
 
-   
-    sf::Vector2f mousecords;
+    
+    VertexArray calcuatevetex()
+    {
+        sf::VertexArray points(sf::LineStrip, xpixels + ypixels * xpixels);
+        
+        for (int j = 0; j < xpixels; j++) 
+        {
+            for (int i = 0; i < ypixels; i++)
+            {
+                Vector2f point;
+                point.x = j;
+                point.y = i;   
+                
+
+                complex<float> c = convertxytocomplex(point);
+                int iter = FindIterationsFromC(c, MAX_ITER);
+                points[j + i * xpixels].position = point;
+                points[j + i * xpixels].color = ConvertIterToColor(iter);
+            }
+        }
+        return points;
+    }
+
     //Functions
     
     
-    sf::Color Madelbrot(int iterations) {
+    sf::Color ConvertIterToColor(int iterations) {
      int t = iterations;
      int r = 9 * (1 - t) * pow(t, 3);
      int g = 15 * pow((1 - t), 2) * pow(t, 3);
@@ -43,7 +64,7 @@ public:
      return sf::Color(r, g, b);
     }
 
-    int defineset::mandelbrot(complex<float> c, int MAX_ITER)
+    int defineset::FindIterationsFromC(complex<float> c, int MAX_ITER)
         
     {
         
@@ -64,9 +85,9 @@ public:
         
     }
   
-    complex<float> convertxytocomplex(int x, int y) {
-       complex<float> c = { (x - xpixels / 2)* BASE_ZOOM + xset,
-            (y - xpixels / 2)* BASE_ZOOM + yset };
+    complex<float> convertxytocomplex(Vector2f point) {
+       complex<float> c = { (point.x - xpixels / 2)* BASE_ZOOM + xset,
+            (point.y - xpixels / 2)* BASE_ZOOM + yset };
        //
        return c;
     }
@@ -100,10 +121,10 @@ int main()
 
     sf::Color(0, 0, 0);
    
+    VertexArray main;
    
     
-    sf::Thread thread(&defineset::Madelbrot, &mandle);
-    thread.launch();
+    
 
     // Create a window with the same pixel depth as the desktop
     sf::RenderWindow window;
@@ -179,29 +200,21 @@ int main()
         //use the view class to covert pixels to complex cordeinates
         //use vertex array to assign points
         //draw vertex array
-            for (int x = 0; x < mandle.xpixels; x++)
-            {
-                for (int y = 0; y < mandle.ypixels; y++)
-                {
-                    complex<float> c = mandle.convertxytocomplex(x, y);
-                    
-                    double t = mandle.mandelbrot(c,mandle.MAX_ITER);
-                    
-                    rectangle7.setFillColor(mandle.Madelbrot(t));
+        
 
-                    rectangle7.setPosition(x, y);
-                    window.draw(rectangle7);
 
-                    
-                    //cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
+           
+        if (mandle.calculate = true) {
+           main = mandle.calcuatevetex();
+           
+        }                 
+         mandle.calculate = false;
+         window.draw(main);
 
-                }
-            }                   
-                   //cout << "drawing rectangle at x:" << x << " at y: " << y << " color" << colorvals.at(x + y) << endl;
-                          
-            mandle.calculate = false;
             //cout << "done rendering" << endl;
             
        // }
     }
 }
+
+
