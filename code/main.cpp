@@ -23,7 +23,7 @@ public:
     int const ypixels = 700;//sf::VideoMode::getDesktopMode().height;
     float ratio = ypixels / xpixels;
 
-    const unsigned int MAX_ITER = 6;
+    int MAX_ITER = 100;
     const float BASE_WIDTH = 4.0;
     const float BASE_HEIGHT = 4.0;
     float BASE_ZOOM = 0.004;
@@ -98,7 +98,7 @@ private:
     VertexArray vArray;
     Vector2f point;
     complex<float> c;
-    int iter;
+    long double iter;
     Color color;
     
 };
@@ -113,7 +113,8 @@ int main()
     defineset mandle;
 
     
-         
+    
+    
     VertexArray main;
     
     sf::Text text;
@@ -122,17 +123,15 @@ int main()
     {
         // error...
     }
+    string s = "poo";
+    
+    
     text.setFont(font);
-    text.setString("Not Calcuating" );
     text.setCharacterSize(24);
     text.setFillColor(sf::Color::White);
-    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    text.setString(s);
 
-    text.setFont(font);
-    text.setString("Percision");
-    text.setCharacterSize(24);
-    text.setFillColor(sf::Color::White);
-    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    
    
     // use these as a thread refernce later when functions are private
      
@@ -193,7 +192,15 @@ int main()
                 mandle.xset += 40 * mandle.BASE_ZOOM;
                 mandle.calculate = true;
             }
-
+            if (Keyboard::isKeyPressed(Keyboard::Add)) {
+                mandle.MAX_ITER = mandle.MAX_ITER + 10;
+                mandle.calculate = true;
+                
+            }
+            if (Keyboard::isKeyPressed(Keyboard::Subtract)) {
+                mandle.MAX_ITER = mandle.MAX_ITER  -  10;
+                mandle.calculate = true;
+            }
 
 
 
@@ -211,7 +218,7 @@ int main()
 
 
     
-
+        
         window.display();
         //everything renders here
         //if (mandle.calculate == true) {
@@ -223,20 +230,19 @@ int main()
         //draw vertex array
         
 
-      
-           
+        
         if (mandle.calculate = true) {
-           text.setString("Calcuating");
-           window.draw(text);
+          
            
            mandle.calcuatevetex();
            main = mandle.recoverarray();
+           string s = to_string(mandle.MAX_ITER);
            
         }                 
          mandle.calculate = false;
-         window.draw(main);
-         text.setString("Finished Calc");
-         window.draw(text);
+         window.draw(main);   
+         text.setString(s);
+         
          
             //cout << "done rendering" << endl;
             
