@@ -19,11 +19,11 @@ public:
     float xset = -0.5;
     float yset = 0.5;
 
-    int const xpixels = 600;//sf::VideoMode::getDesktopMode().width;
-    int const ypixels = 400;//sf::VideoMode::getDesktopMode().height;
+    int const xpixels = 800;//sf::VideoMode::getDesktopMode().width;
+    int const ypixels = 700;//sf::VideoMode::getDesktopMode().height;
     float ratio = ypixels / xpixels;
 
-    const unsigned int MAX_ITER = 1000;
+    const unsigned int MAX_ITER = 6;
     const float BASE_WIDTH = 4.0;
     const float BASE_HEIGHT = 4.0;
     float BASE_ZOOM = 0.004;
@@ -115,7 +115,24 @@ int main()
     
          
     VertexArray main;
-        
+    
+    sf::Text text;
+    sf::Font font;
+    if (!font.loadFromFile("arial.ttf"))
+    {
+        // error...
+    }
+    text.setFont(font);
+    text.setString("Not Calcuating" );
+    text.setCharacterSize(24);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+    text.setFont(font);
+    text.setString("Percision");
+    text.setCharacterSize(24);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
    
     // use these as a thread refernce later when functions are private
      
@@ -209,14 +226,17 @@ int main()
       
            
         if (mandle.calculate = true) {
-                       
+           text.setString("Calcuating");
+           window.draw(text);
+           
            mandle.calcuatevetex();
            main = mandle.recoverarray();
            
         }                 
          mandle.calculate = false;
          window.draw(main);
-         
+         text.setString("Finished Calc");
+         window.draw(text);
          
             //cout << "done rendering" << endl;
             
