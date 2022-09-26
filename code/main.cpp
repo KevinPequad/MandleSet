@@ -112,8 +112,8 @@ int main()
    
     // use these as a thread refernce later when functions are private
     // 
-    //sf::Thread thread(&defineset::calcuatevetex, &mandle);
-    //thread.launch();
+    sf::Thread thread(&defineset::calcuatevetex, &mandle);
+    thread.launch();
     
 
     // Create a window with the same pixel depth as the desktop
