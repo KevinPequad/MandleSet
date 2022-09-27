@@ -67,7 +67,7 @@ public:
      color.b = b;
      
     }
-    void defineset::FindIterationsFromC()       
+    void FindIterationsFromC()       
     {       
         complex<long double> z;      
         for(int i = 0; i < MAX_ITER; i++) {
@@ -96,7 +96,7 @@ public:
     complex<long double> pullcomplexvalue() {
         complex<long double> tempc = c;
         return tempc;
-   }
+    }
     
 private:
     VertexArray vArray;
