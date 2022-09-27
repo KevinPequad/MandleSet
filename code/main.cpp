@@ -20,8 +20,8 @@ public:
     float xset = -0.5;
     float yset = 0.5;
 
-    int const xpixels = 600;//sf::VideoMode::getDesktopMode().width;
-    int const ypixels = 500;//sf::VideoMode::getDesktopMode().height;
+    int const xpixels = sf::VideoMode::getDesktopMode().width;
+    int const ypixels = sf::VideoMode::getDesktopMode().height;
     
 
     int MAX_ITER = 100;
@@ -142,22 +142,27 @@ int main()
    
     // use these as a thread refernce later when functions are private
      
+         
+     unsigned int n = std::thread::hardware_concurrency();
+     std::cout << n << " concurrent threads are supported.\n";
+     
+
     sf::Thread thread(&defineset::calcuatevetex, &mandle);
     sf::Thread thread1(&defineset::ConvertIterToColor, &mandle);
-    sf::Thread thread2(&defineset::convertxytocomplex, &mandle);
-    sf::Thread thread3(&defineset::FindIterationsFromC, &mandle);
-    sf::Thread thread4(&defineset::calcuatevetex, &mandle);
-    sf::Thread thread5(&defineset::convertxytocomplex, &mandle);
-    sf::Thread thread6(&defineset::calcuatevetex, &mandle);
+   sf::Thread thread2(&defineset::convertxytocomplex, &mandle);
+   sf::Thread thread3(&defineset::FindIterationsFromC, &mandle);
+   sf::Thread thread4(&defineset::calcuatevetex, &mandle);
+   sf::Thread thread5(&defineset::convertxytocomplex, &mandle);
+   sf::Thread thread6(&defineset::calcuatevetex, &mandle);
     sf::Thread thread7(&defineset::ConvertIterToColor, &mandle);
-    thread7.launch();
-    thread6.launch();
-    thread5.launch();
-    thread4.launch();
+   thread.launch();
     thread1.launch();
-    thread.launch();
     thread2.launch();
-    thread3.launch();
+   thread3.launch();
+    thread4.launch();
+   thread5.launch();
+   thread6.launch();
+   thread7.launch();
 
     // Create a window with the same pixel depth as the desktop
 
