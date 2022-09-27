@@ -1,1 +1,1 @@
-g++ Source.cpp -o ChaosGame -lsfml-graphics -lsfml-window -lsfml-system ./ChaosGame
+g++ main.cpp -o pro -lsfml-graphics -lsfml-window -lsfml-system ./ChaosGame
