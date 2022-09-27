@@ -69,7 +69,7 @@ public:
     }
     void FindIterationsFromC()       
     {       
-        complex<long double> z;      
+        complex<float> z;      
         for(int i = 0; i < MAX_ITER; i++) {
             z = z * z + c;                   
             if (abs(z) >= 2) {
@@ -93,15 +93,15 @@ public:
       
        
     }
-    complex<long double> pullcomplexvalue() {
-        complex<long double> tempc = c;
+    complex<float> pullcomplexvalue() {
+        complex<float> tempc = c;
         return tempc;
     }
     
 private:
     VertexArray vArray;
     Vector2f point;
-    complex<long double> c;
+    complex<float> c;
     int iter;
     Color color;
     
@@ -255,7 +255,7 @@ int main()
          auto text_builder = std::ostringstream();
          text_builder << setw(4) << int(1 / clock.restart().asSeconds()) << " fps\n";
          text_builder << setw(4) << mandle.MAX_ITER << " iters\n";
-         text_builder << setprecision(1) << std::scientific << (long double)mandle.MAX_ITER /  mandle.pullcomplexvalue() << '\n';
+         text_builder << setprecision(1) << std::scientific << (complex<float>)mandle.MAX_ITER /  mandle.pullcomplexvalue() << '\n';
          text.setString(text_builder.str());
          window.draw(text);
     }
