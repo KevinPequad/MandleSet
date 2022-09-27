@@ -238,9 +238,9 @@ int main()
         //use vertex array to assign points
         //draw vertex array
         
-
+        window.clear();
         
-        if (mandle.calculate = true) {
+        if (mandle.calculate == true) {
           
           
            mandle.calcuatevetex();
@@ -249,7 +249,7 @@ int main()
            
         }                 
          mandle.calculate = false;
-         window.draw(main);   
+         
          
          
          auto text_builder = std::ostringstream();
@@ -257,6 +257,7 @@ int main()
          text_builder << setw(4) << mandle.MAX_ITER << " iters\n";
          text_builder << setprecision(1) << std::scientific << (complex<float>)mandle.MAX_ITER /  mandle.pullcomplexvalue() << '\n';
          text.setString(text_builder.str());
+         window.draw(main);
          window.draw(text);
     }
 }
