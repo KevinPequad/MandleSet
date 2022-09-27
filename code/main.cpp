@@ -20,8 +20,8 @@ public:
     float xset = -0.5;
     float yset = 0.5;
 
-    int const xpixels = 800;//sf::VideoMode::getDesktopMode().width;
-    int const ypixels = 700;//sf::VideoMode::getDesktopMode().height;
+    int const xpixels = sf::VideoMode::getDesktopMode().width;
+    int const ypixels = sf::VideoMode::getDesktopMode().height;
     float ratio = ypixels / xpixels;
 
     int MAX_ITER = 100;
@@ -146,6 +146,12 @@ int main()
     sf::Thread thread1(&defineset::ConvertIterToColor, &mandle);
     sf::Thread thread2(&defineset::convertxytocomplex, &mandle);
     sf::Thread thread3(&defineset::FindIterationsFromC, &mandle);
+    sf::Thread thread4(&defineset::calcuatevetex, &mandle);
+    sf::Thread thread5(&defineset::convertxytocomplex, &mandle);
+    sf::Thread thread6(&defineset::calcuatevetex, &mandle);
+    thread6.launch();
+    thread5.launch();
+    thread4.launch();
     thread1.launch();
     thread.launch();
     thread2.launch();
@@ -208,14 +214,7 @@ int main()
             if (Keyboard::isKeyPressed(Keyboard::Subtract)) {
                 mandle.MAX_ITER = mandle.MAX_ITER  -  10;
                 mandle.calculate = true;
-            }
-
-
-
-
-
-
-            // "close requested" event: we close the window
+            }            
             if (Keyboard::isKeyPressed(Keyboard::Escape)){
                 window.close();
             };
