@@ -93,7 +93,10 @@ public:
       
        
     }
-   
+    complex<long double> pullcomplexvalue() {
+        complex<long double> tempc = c;
+        return tempc;
+   }
     
 private:
     VertexArray vArray;
@@ -238,7 +241,7 @@ int main()
         
         if (mandle.calculate = true) {
           
-           
+          
            mandle.calcuatevetex();
            main = mandle.recoverarray();
            
@@ -251,7 +254,7 @@ int main()
          auto text_builder = std::ostringstream();
          text_builder << setw(4) << int(1 / clock.restart().asSeconds()) << " fps\n";
          text_builder << setw(4) << mandle.MAX_ITER << " iters\n";
-         text_builder << setprecision(1) << std::scientific << "caculated" << '\n';
+         text_builder << setprecision(1) << std::scientific << (long double)mandle.MAX_ITER /  mandle.pullcomplexvalue() << '\n';
          text.setString(text_builder.str());
          window.draw(text);
     }
