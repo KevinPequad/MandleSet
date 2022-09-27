@@ -7,7 +7,7 @@
 #include <thread>
 #include <iomanip>
 
-using Complex = std::complex<long double>;
+
 // std::complex, std::abs
 using namespace std;
 using namespace sf;
