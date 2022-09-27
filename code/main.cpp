@@ -5,8 +5,9 @@
 #include <complex> 
 #include <algorithm>
 #include <thread>
+#include <iomanip>
 
-
+using Complex = std::complex<long double>;
 // std::complex, std::abs
 using namespace std;
 using namespace sf;
@@ -68,7 +69,7 @@ public:
     }
     void defineset::FindIterationsFromC()       
     {       
-        complex<float> z;      
+        complex<long double> z;      
         for(int i = 0; i < MAX_ITER; i++) {
             z = z * z + c;                   
             if (abs(z) >= 2) {
@@ -97,8 +98,8 @@ public:
 private:
     VertexArray vArray;
     Vector2f point;
-    complex<float> c;
-    long double iter;
+    complex<long double> c;
+    int iter;
     Color color;
     
 };
@@ -123,13 +124,16 @@ int main()
     {
         // error...
     }
-    string s = "poo";
     
     
-    text.setFont(font);
-    text.setCharacterSize(24);
+    auto clock = sf::Clock();
+    
+    text = sf::Text("", font, 24);
     text.setFillColor(sf::Color::White);
-    text.setString(s);
+    text.setOutlineThickness(2);
+    text.setOutlineColor(sf::Color::Black);
+    text.setPosition({ 10, 5 });
+
 
     
    
@@ -151,6 +155,7 @@ int main()
     window.create(sf::VideoMode(mandle.xpixels, mandle.ypixels), "SFML window");
     window.setFramerateLimit(60);
     // run the program as long as the window is open
+    
 
     while (window.isOpen())
     {
@@ -236,18 +241,19 @@ int main()
            
            mandle.calcuatevetex();
            main = mandle.recoverarray();
-           string s = to_string(mandle.MAX_ITER);
+           
            
         }                 
          mandle.calculate = false;
          window.draw(main);   
-         text.setString(s);
          
          
-            //cout << "done rendering" << endl;
-            
-       // }
+         auto text_builder = std::ostringstream();
+         text_builder << setw(4) << int(1 / clock.restart().asSeconds()) << " fps\n";
+         text_builder << setw(4) << mandle.MAX_ITER << " iters\n";
+         text_builder << setprecision(1) << std::scientific << "caculated" << '\n';
+         text.setString(text_builder.str());
+         window.draw(text);
     }
 }
-
-
+ 
