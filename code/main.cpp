@@ -22,7 +22,7 @@ public:
 
     int const xpixels = sf::VideoMode::getDesktopMode().width;
     int const ypixels = sf::VideoMode::getDesktopMode().height;
-    float ratio = ypixels / xpixels;
+    
 
     int MAX_ITER = 100;
     const float BASE_WIDTH = 4.0;
