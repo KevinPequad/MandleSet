@@ -149,6 +149,8 @@ int main()
     sf::Thread thread4(&defineset::calcuatevetex, &mandle);
     sf::Thread thread5(&defineset::convertxytocomplex, &mandle);
     sf::Thread thread6(&defineset::calcuatevetex, &mandle);
+    sf::Thread thread7(&defineset::ConvertIterToColor, &mandle);
+    thread7.launch();
     thread6.launch();
     thread5.launch();
     thread4.launch();
