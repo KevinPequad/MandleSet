@@ -20,8 +20,8 @@ public:
     float xset = -0.5;
     float yset = 0.5;
 
-    int const xpixels = sf::VideoMode::getDesktopMode().width;
-    int const ypixels = sf::VideoMode::getDesktopMode().height;
+    int const xpixels = 600;//sf::VideoMode::getDesktopMode().width;
+    int const ypixels = 500;//sf::VideoMode::getDesktopMode().height;
     
 
     int MAX_ITER = 100;
@@ -33,7 +33,7 @@ public:
     
    void calcuatevetex()
     {
-        sf::VertexArray points(sf::LineStrip, xpixels + ypixels * xpixels);
+        sf::VertexArray points(sf::LineStrip, xpixels + 1 + ypixels * xpixels);
         
         for (int j = 0; j <= xpixels; j++) 
         {
