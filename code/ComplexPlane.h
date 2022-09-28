@@ -30,7 +30,8 @@ public:
     bool pullbool();
     void setboolfalse();
     int pulliter();
-
+    
+    ;
 private:
 
     sf::VertexArray vArray;
@@ -46,4 +47,6 @@ private:
     float yset = 0.5;
     int MAX_ITER = 100;
     float BASE_ZOOM = 0.004;
+    
+    
 };

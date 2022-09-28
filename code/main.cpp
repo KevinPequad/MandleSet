@@ -42,8 +42,8 @@ int main()
     text.setPosition({ 10, 5 });
 
     // use these as a thread refernce later when functions are private
-  /*
-    sf::Thread thread(&defineset::calcuatevetex, &mandle, );
+  /*m_thread(&Ccalculatevetex::f, this)
+    sf::Thread thread(&defineset::calcuatevetex, &mandle,);
     sf::Thread thread1(&defineset::ConvertIterToColor, &mandle);
     sf::Thread thread2(&defineset::convertxytocomplex, &mandle);
     sf::Thread thread3(&defineset::FindIterationsFromC, &mandle);
