@@ -1,5 +1,7 @@
 
 
+
+
 #include <iostream>
 #include <vector>     
 #include <complex> 
@@ -15,7 +17,8 @@ using namespace sf;
 int main()
 {
     Defineset mandle(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height);
-    
+
+
     // Create a window with the same pixel depth as the desktop
 
     sf::RenderWindow window;
@@ -23,7 +26,7 @@ int main()
     window.create(sf::VideoMode(mandle.returnxpixels(), mandle.returnypixels()), "SFML window");
     window.setFramerateLimit(60);
     // run the program as long as the window is open
-   
+
     sf::Text textcalc;
     sf::Text text;
     sf::Font font;
@@ -31,7 +34,7 @@ int main()
     {
         // error...
     }
-    
+
 
     auto clock = sf::Clock();
 
@@ -48,7 +51,7 @@ int main()
     textcalc.setPosition({ 500, 500 });
 
     // use these as a thread refernce later when functions are private
-  
+
     //sf::Thread thread(&Defineset::calcuatevetex, &mandle);
     //sf::Thread thread1(&Defineset::ConvertIterToColor, &mandle);
    //sf::Thread thread2(&Defineset::convertxytocomplex, &mandle);
@@ -57,19 +60,19 @@ int main()
    // sf::Thread thread5(&Defineset::convertxytocomplex, &mandle);
    // sf::Thread thread6(&Defineset::calcuatevetex, &mandle);
     //sf::Thread thread7(&Defineset::ConvertIterToColor, &mandle);
-    
-    
+
+
 
     while (window.isOpen())
     {
-       // thread7.launch();
-       // thread6.launch();
-       // thread5.launch();
-       // thread4.launch();
-       // thread1.launch();
-       // thread.launch();
-       // thread2.launch();
-        //thread3.launch();
+        // thread7.launch();
+        // thread6.launch();
+        // thread5.launch();
+        // thread4.launch();
+        // thread1.launch();
+        // thread.launch();
+        // thread2.launch();
+         //thread3.launch();
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -109,7 +112,7 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        
+
         window.display();
         window.clear();
         if (mandle.pullbool() == true) {
@@ -123,17 +126,17 @@ int main()
             textcalc.setString(text_builder.str());
             window.draw(textcalc);
             window.display();
-            
-            
+
+
         }
-        
-        
+
+
         if (mandle.pullbool() == true) {
             //THIS IS WHERE YOU WOULD MULTITHREAD
             //EACH THREAD GETS calculateVertex
             //sf::Thread thread(&defineset::calcuatevetex, &mandle, 0);
             //sf::Thread thread(&defineset::calcuatevetex, &mandle, 1);
-            mandle.calcuatevetex();               
+            mandle.calcuatevetex();
             mandle.setboolfalse();
             window.display();
         }
@@ -143,13 +146,12 @@ int main()
         text_builder << setw(4) << mandle.pulliter() << " iters\n";
         text_builder << setprecision(1) << std::scientific << (complex<float>)mandle.pulliter() / mandle.pullcomplexvalue() << '\n';
         text_builder << "Right Click:zoom" << endl << "Left Click:Unzoom" << endl << " + - for Iteration" << endl << " A W S D Movement";
-        
+
         text.setString(text_builder.str());
-        
+
         window.draw(mandle.recoverarray());
         window.draw(text);
-        
+
 
     }
 }
- 

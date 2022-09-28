@@ -31,9 +31,9 @@ public:
     void setboolfalse();
     int pulliter();
     
-    ;
-private:
 
+private:
+    sf::VertexArray vArray1;
     sf::VertexArray vArray;
     sf::Vector2f point;
     std::complex<float> c;
