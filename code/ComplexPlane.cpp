@@ -14,7 +14,7 @@ Defineset::Defineset(unsigned int _xpixels, unsigned int _ypixels)
     xpixels = _xpixels;
     ypixels = _ypixels;
     points.setPrimitiveType(sf::Points);
-    points.resize(2000 * 2000);
+    points.resize(xpixels + 1 + ypixels * xpixels);
 
 }
 void Defineset::calcuatevetex()
