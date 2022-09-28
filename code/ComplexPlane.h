@@ -41,7 +41,6 @@ private:
     sf::Color color;
     sf::VertexArray points;
     unsigned int xpixels, ypixels;
-
     bool calculate = true;
     float xset = -0.5;
     float yset = 0.5;

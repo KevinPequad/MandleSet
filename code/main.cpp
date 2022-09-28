@@ -51,7 +51,7 @@ int main()
   
     //sf::Thread thread(&Defineset::calcuatevetex, &mandle);
     //sf::Thread thread1(&Defineset::ConvertIterToColor, &mandle);
-   // sf::Thread thread2(&Defineset::convertxytocomplex, &mandle);
+   //sf::Thread thread2(&Defineset::convertxytocomplex, &mandle);
     //sf::Thread thread3(&Defineset::FindIterationsFromC, &mandle);
     //sf::Thread thread4(&Defineset::calcuatevetex, &mandle);
    // sf::Thread thread5(&Defineset::convertxytocomplex, &mandle);
@@ -123,10 +123,10 @@ int main()
             textcalc.setString(text_builder.str());
             window.draw(textcalc);
             window.display();
-
+            
             
         }
-
+        
         
         if (mandle.pullbool() == true) {
             //THIS IS WHERE YOU WOULD MULTITHREAD
