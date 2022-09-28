@@ -14,7 +14,7 @@ using namespace sf;
 
 class defineset {
 public:
-
+    S
     bool calculate = true;
     
     float xset = -0.5;
@@ -33,7 +33,7 @@ public:
     
    void calcuatevetex()
     {
-        sf::VertexArray points(sf::LineStrip, xpixels + 1 + ypixels * xpixels);
+        sf::VertexArray points(sf::Points, xpixels + 1 + ypixels * xpixels);
         
         for (int j = 0; j <= xpixels; j++) 
         {
@@ -147,22 +147,7 @@ int main()
      std::cout << n << " concurrent threads are supported.\n";
      
 
-    sf::Thread thread(&defineset::calcuatevetex, &mandle);
-    sf::Thread thread1(&defineset::ConvertIterToColor, &mandle);
-   sf::Thread thread2(&defineset::convertxytocomplex, &mandle);
-   sf::Thread thread3(&defineset::FindIterationsFromC, &mandle);
-   sf::Thread thread4(&defineset::calcuatevetex, &mandle);
-   sf::Thread thread5(&defineset::convertxytocomplex, &mandle);
-   sf::Thread thread6(&defineset::calcuatevetex, &mandle);
-    sf::Thread thread7(&defineset::ConvertIterToColor, &mandle);
-   thread.launch();
-    thread1.launch();
-    thread2.launch();
-   thread3.launch();
-    thread4.launch();
-   thread5.launch();
-   thread6.launch();
-   thread7.launch();
+   
 
     // Create a window with the same pixel depth as the desktop
 
