@@ -8,11 +8,7 @@ const float BASE_HEIGHT = 4.0;
 class Defineset {
 public:
 
-    bool calculate = true;
-    float xset = -0.5;
-    float yset = 0.5;   
-    int MAX_ITER = 100;
-    float BASE_ZOOM = 0.004;
+   
 
     Defineset(unsigned int _xpixels, unsigned int _ypixels);
     void calcuatevetex();
@@ -23,6 +19,17 @@ public:
     sf::VertexArray recoverarray();
     int returnxpixels();
     int returnypixels();
+    void wkey();
+    void akey();
+    void skey();
+    void dkey();
+    void leftkey();
+    void rightkey();
+    void pluskey();
+    void minuskey();
+    bool pullbool();
+    void setboolfalse();
+    int pulliter();
 
 private:
 
@@ -33,4 +40,10 @@ private:
     sf::Color color;
     sf::VertexArray points;
     unsigned int xpixels, ypixels;
+
+    bool calculate = true;
+    float xset = -0.5;
+    float yset = 0.5;
+    int MAX_ITER = 100;
+    float BASE_ZOOM = 0.004;
 };

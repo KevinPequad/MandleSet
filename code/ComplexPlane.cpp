@@ -7,6 +7,16 @@
 #include "ComplexPlane.h"
 
 
+
+
+Defineset::Defineset(unsigned int _xpixels, unsigned int _ypixels)
+{
+    xpixels = _xpixels;
+    ypixels = _ypixels;
+    points.setPrimitiveType(sf::Points);
+    points.resize(2000 * 2000);
+
+}
 void Defineset::calcuatevetex()
 {
     ///sf::VertexArray points(sf::Points, xpixels + 1 + ypixels * xpixels);
@@ -30,14 +40,7 @@ void Defineset::calcuatevetex()
     vArray = points;
 }
 
-Defineset::Defineset(unsigned int _xpixels, unsigned int _ypixels)
-{
-    xpixels = _xpixels;
-    ypixels = _ypixels;
-    points.setPrimitiveType(sf::Points);
-    points.resize(xpixels * ypixels);
-    iter = 0;
-}
+
 
 sf::VertexArray Defineset::recoverarray() {
     return vArray;
@@ -83,4 +86,46 @@ int Defineset::returnxpixels() {
 }
 int Defineset::returnypixels() {
     return ypixels;
+}
+void Defineset::wkey() {
+    yset -= 40 * BASE_ZOOM;
+    calculate = true;
+}
+void Defineset::akey() {
+    xset -= 40 * BASE_ZOOM;
+    calculate = true;
+}
+void Defineset::skey() {
+    yset += 40 * BASE_ZOOM;
+    calculate = true;
+}
+void Defineset::dkey() {
+    xset += 40 * BASE_ZOOM;
+    calculate = true;
+}
+void Defineset::leftkey() {
+    BASE_ZOOM /= 0.9;
+    calculate = true;
+}
+void Defineset::rightkey() {
+    BASE_ZOOM *= 0.9;
+    calculate = true;
+}
+void Defineset::pluskey() {
+    MAX_ITER = MAX_ITER + 10;
+    calculate = true;
+}
+void Defineset::minuskey() {
+    MAX_ITER = MAX_ITER - 10;
+    calculate = true;
+}
+bool Defineset::pullbool() {
+    return calculate;
+}
+void Defineset::setboolfalse() {
+    calculate = false;
+    
+}
+int Defineset::pulliter() {
+    return MAX_ITER;
 }
