@@ -61,7 +61,7 @@ int main()
    // sf::Thread thread6(&Defineset::calcuatevetex, &mandle);
     //sf::Thread thread7(&Defineset::ConvertIterToColor, &mandle);
 
-
+    sf::VertexArray vArray;
 
     while (window.isOpen())
     {
@@ -73,7 +73,7 @@ int main()
         // thread.launch();
         // thread2.launch();
          //thread3.launch();
-
+        
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -126,7 +126,7 @@ int main()
             textcalc.setString(text_builder.str());
             window.draw(textcalc);
             window.display();
-
+            
 
         }
 
@@ -139,6 +139,7 @@ int main()
             mandle.calcuatevetex();
             mandle.setboolfalse();
             window.display();
+            vArray = mandle.recoverarray();
         }
 
         auto text_builder = std::ostringstream();
@@ -149,7 +150,7 @@ int main()
 
         text.setString(text_builder.str());
 
-        window.draw(mandle.recoverarray());
+        window.draw(vArray);
         window.draw(text);
 
 

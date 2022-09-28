@@ -14,7 +14,7 @@ Defineset::Defineset(unsigned int _xpixels, unsigned int _ypixels)
     xpixels = _xpixels;
     ypixels = _ypixels;
     points.setPrimitiveType(sf::Points);
-    points.resize(xpixels + 1 + ypixels * xpixels);
+    points.resize(ypixels * xpixels);
 
 }
 void Defineset::calcuatevetex()
@@ -22,9 +22,9 @@ void Defineset::calcuatevetex()
     ///sf::VertexArray points(sf::Points, xpixels + 1 + ypixels * xpixels);
         
 
-    for (int j = 0; j <= xpixels; j++)
+    for (int j = 0; j < xpixels; j++)
     {
-        for (int i = 0; i <= ypixels; i++)
+        for (int i = 0; i < ypixels; i++)
         {
 
             point.x = j;
