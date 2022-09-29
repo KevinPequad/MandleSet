@@ -42,7 +42,7 @@ void Defineset::calcuatevetex()
 
 
 
-sf::VertexArray Defineset::recoverarray() {
+sf::VertexArray& Defineset::recoverarray() {
     return vArray;
 }
 void Defineset::ConvertIterToColor() {
