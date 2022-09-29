@@ -16,7 +16,7 @@ public:
     std::complex<float> pullcomplexvalue();
     void FindIterationsFromC();
     void ConvertIterToColor();
-    sf::VertexArray recoverarray();
+    sf::VertexArray& recoverarray();
     int returnxpixels();
     int returnypixels();
     void wkey();
