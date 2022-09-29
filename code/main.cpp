@@ -36,7 +36,7 @@ int main()
     }
 
 
-    auto clock = sf::Clock();
+    auto &clock = sf::Clock();
 
     text = sf::Text("", font, 24);
     text.setFillColor(sf::Color::White);
@@ -50,29 +50,12 @@ int main()
     textcalc.setOutlineColor(sf::Color::Black);
     textcalc.setPosition({ 500, 500 });
 
-    // use these as a thread refernce later when functions are private
+    
 
-    //sf::Thread thread(&Defineset::calcuatevetex, &mandle);
-    //sf::Thread thread1(&Defineset::ConvertIterToColor, &mandle);
-   //sf::Thread thread2(&Defineset::convertxytocomplex, &mandle);
-    //sf::Thread thread3(&Defineset::FindIterationsFromC, &mandle);
-    //sf::Thread thread4(&Defineset::calcuatevetex, &mandle);
-   // sf::Thread thread5(&Defineset::convertxytocomplex, &mandle);
-   // sf::Thread thread6(&Defineset::calcuatevetex, &mandle);
-    //sf::Thread thread7(&Defineset::ConvertIterToColor, &mandle);
-
-    sf::VertexArray vArray;
+    
 
     while (window.isOpen())
     {
-        // thread7.launch();
-        // thread6.launch();
-        // thread5.launch();
-        // thread4.launch();
-        // thread1.launch();
-        // thread.launch();
-        // thread2.launch();
-         //thread3.launch();
         
         sf::Event event;
         while (window.pollEvent(event))
@@ -126,31 +109,27 @@ int main()
             textcalc.setString(text_builder.str());
             window.draw(textcalc);
             window.display();
-            
+
 
         }
 
 
         if (mandle.pullbool() == true) {
-            //THIS IS WHERE YOU WOULD MULTITHREAD
-            //EACH THREAD GETS calculateVertex
-            //sf::Thread thread(&defineset::calcuatevetex, &mandle, 0);
-            //sf::Thread thread(&defineset::calcuatevetex, &mandle, 1);
+           
             mandle.calcuatevetex();
             mandle.setboolfalse();
             window.display();
-            vArray = mandle.recoverarray();
+            
         }
-
-        auto text_builder = std::ostringstream();
+       
+        auto text_builder = std::ostringstream();        
         text_builder << setw(4) << int(1 / clock.restart().asSeconds()) << " fps\n";
         text_builder << setw(4) << mandle.pulliter() << " iters\n";
         text_builder << setprecision(1) << std::scientific << (complex<float>)mandle.pulliter() / mandle.pullcomplexvalue() << '\n';
         text_builder << "Right Click:zoom" << endl << "Left Click:Unzoom" << endl << " + - for Iteration" << endl << " A W S D Movement";
-
+        
         text.setString(text_builder.str());
-
-        window.draw(vArray);
+        window.draw(mandle.recoverarray());
         window.draw(text);
 
 
