@@ -43,7 +43,7 @@ private:
     unsigned int xpixels, ypixels;
     bool calculate = true;
     float xset = -0.5;
-    float yset = 0.5;
+    float yset = 2.0;
     int MAX_ITER = 100;
     float BASE_ZOOM = 0.004;
     
