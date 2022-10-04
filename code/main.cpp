@@ -36,7 +36,7 @@ int main()
     }
 
 
-    auto &clock = sf::Clock();
+    auto clock = sf::Clock();
 
     text = sf::Text("", font, 24);
     text.setFillColor(sf::Color::White);
